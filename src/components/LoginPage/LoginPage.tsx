@@ -4,32 +4,14 @@ const LoginPage = () => {
   return (
     <div className="LoginContainer">
       <section className="cover-img-container">
-        <img src="cover.png" alt="Earth view from the space " />
+        {/* <img src="cover.png" alt="Earth view from the space " /> */}
       </section>
       <section className="form-container">
+        <header className="welcome-header">
+          <h1>Welcome back!</h1>
+          <h2>Enter your Credentials to access your account</h2>
+        </header>
         <LoginForm></LoginForm>
-        {/* <form action="">
-          <div className="input-filed">
-            <label htmlFor="user-name">User name</label>
-            <input type="text" placeholder="Enter your Username" required />
-          </div>
-          <div className="input-filed">
-            <label htmlFor="password">
-              Password{" "}
-              <a href="#" className="forget-password-link">
-                Forget password
-              </a>
-            </label>
-            <input type="password" placeholder="password" required />
-          </div>
-          <div className="remember-user-checkbox">
-            <input type="checkbox" placeholder="password" id="remember-user" />
-            <label htmlFor="remember-user">Remember me</label>
-          </div>
-          <div className="input-filed login-button">
-            <input type="submit" value={"Login"} />
-          </div>
-        </form> */}
         <div className="google-apple-container">
           <section className="login-options-container">
             <img src="google.png" alt="Google Logo " />

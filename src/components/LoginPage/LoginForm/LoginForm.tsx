@@ -1,12 +1,10 @@
 import "react-app-polyfill/ie11";
 import { Formik, Field, Form, FormikHelpers } from "formik";
-import "../LoginPage.css";
+import "./LoginForm.css";
+import "./loginButton.css";
+
 import { LoginSchema } from "./constants";
-interface Values {
-  username: string;
-  password: string;
-  rememberUser: boolean;
-}
+import { login, User } from "../../../APIs";
 
 const LoginForm = () => {
   return (
@@ -14,12 +12,16 @@ const LoginForm = () => {
       initialValues={{
         username: "",
         password: "",
-        rememberUser: false,
       }}
       validationSchema={LoginSchema}
-      onSubmit={(values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+      onSubmit={(user: User, { setSubmitting }: FormikHelpers<User>) => {
         setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
+          login(user).then((res) => {
+            if (res?.ok || true) {
+              //TO DO : redirect to the home page
+            }
+          });
+
           setSubmitting(false);
         }, 500);
       }}>
@@ -46,7 +48,6 @@ const LoginForm = () => {
               </a>
             </label>
             <Field
-              name="password"
               id="password"
               type="password"
               placeholder="password"
@@ -65,8 +66,11 @@ const LoginForm = () => {
             />
             <label htmlFor="remember-user">Remember me</label>
           </div>
-          <div className="input-field login-button">
-            <button id="login-btn" type="submit">
+          <div className="input-field login-button ">
+            <button
+              id="login-btn"
+              type="submit"
+              className="hvr-sweep-to-right hvr-grow">
               Login
             </button>
           </div>
