@@ -1,29 +1,33 @@
 import "react-app-polyfill/ie11";
-import { Formik, Field, Form, FormikHelpers } from "formik";
+import { Formik, Field, FormikHelpers, Form } from "formik";
+import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 import "./loginButton.css";
 
-import { LoginSchema } from "./constants";
-import { login, User } from "../../../APIs";
+import { LoginValidationSchema } from "./constants";
+import { loginLoader, User } from "../../../APIs";
 
 const LoginForm = () => {
+  let navigate = useNavigate();
+
   return (
     <Formik
       initialValues={{
         username: "",
         password: "",
       }}
-      validationSchema={LoginSchema}
-      onSubmit={(user: User, { setSubmitting }: FormikHelpers<User>) => {
-        setTimeout(() => {
-          login(user).then((res) => {
-            if (res?.ok || true) {
-              //TO DO : redirect to the home page
-            }
-          });
-
-          setSubmitting(false);
-        }, 500);
+      validationSchema={LoginValidationSchema}
+      onSubmit={async (user: User, { setSubmitting }: FormikHelpers<User>) => {
+        setSubmitting(true);
+        try {
+          const res = await loginLoader(user);
+          if (res?.ok || true) {
+            navigate("/", { replace: true });
+          }
+        } catch (error) {
+          console.error("Login failed:", error);
+        }
+        setSubmitting(false);
       }}>
       {({ errors, touched }) => (
         <Form>
@@ -47,12 +51,7 @@ const LoginForm = () => {
                 Forget password
               </a>
             </label>
-            <Field
-              id="password"
-              type="password"
-              placeholder="password"
-              required
-            />
+            <Field id="password" name="password" type="password" required />
             {errors.password && touched.password ? (
               <div className="invalid-input-error">{errors.password}</div>
             ) : null}

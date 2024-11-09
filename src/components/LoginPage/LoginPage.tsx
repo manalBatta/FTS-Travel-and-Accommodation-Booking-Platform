@@ -14,12 +14,12 @@ const LoginPage = () => {
         <LoginForm></LoginForm>
         <div className="google-apple-container">
           <section className="login-options-container">
-            <img src="google.png" alt="Google Logo " />
+            <img src="/google.png" alt="Google Logo " />
             <a href="#">Sign in with Google</a>
           </section>
           <section className="login-options-container">
-            <img src="apple.png" alt="Apple Logo " />
-            <a href="#">Sign in with Apple</a>
+            <img src="/apple.png" alt="Apple Logo " />
+            <a href="#"> Sign in with Apple</a>
           </section>
         </div>
         <p style={{ textAlign: "center", width: "100%" }}>
