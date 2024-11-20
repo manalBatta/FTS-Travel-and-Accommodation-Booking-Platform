@@ -22,8 +22,7 @@ const SearchBar = () => {
 
   const getSearchResult = async () => {
     const response = await search(searchDetails);
-    const reader = response.body?.getReader();
-    readFromReader(reader);
+    readFromReader(response);
   };
 
   const changeSearchDetails = (event: React.ChangeEvent<HTMLInputElement>) => {

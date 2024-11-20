@@ -20,10 +20,9 @@ const LoginForm = () => {
       onSubmit={async (user: User, { setSubmitting }: FormikHelpers<User>) => {
         setSubmitting(true);
         try {
-          const res = await login(user);
-          if (res?.ok || true) {
-            const reader = res?.body?.getReader();
-            readFromReader(reader);
+          const response = await login(user);
+          if (response?.ok || true) {
+            readFromReader(response);
             navigate("/", { replace: true });
           }
         } catch (error) {

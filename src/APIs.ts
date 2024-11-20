@@ -1,5 +1,5 @@
 const baseURL =
-  "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net";
+  "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
 
 export interface User {
   username: string;
@@ -15,27 +15,31 @@ export interface SearchDetails {
   children: number;
 }
 
-export async function readFromReader(reader: any) {
+export async function readFromReader(res: Response | undefined | null) {
+  const reader = res?.body?.getReader();
   if (!reader) {
     console.error("Reader is not available.");
     return;
   }
 
   try {
-    let result = await reader.read();
-    while (!result.done) {
-      const chunk = result.value;
-      console.log("Chunk received:", new TextDecoder().decode(chunk));
-      result = await reader.read();
+    const decoder = new TextDecoder();
+    let result = "";
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      result += decoder.decode(value, { stream: true });
     }
-    console.log("Stream reading complete.");
+
+    return result;
   } catch (error) {
     console.error("Error while reading from reader:", error);
   }
 }
 
 export const login = async (user: User) => {
-  return await fetch(baseURL + "/api/auth/authenticate", {
+  return await fetch(baseURL + "/auth/authenticate", {
     method: "POST",
     headers: {
       "Content-Type": "application/json; utf-8",
@@ -46,6 +50,10 @@ export const login = async (user: User) => {
 
 export const search = async (searchDetails: SearchDetails) => {
   return await fetch(
-    baseURL + "/api/home/search?starRate=4&numberOfRooms=1&adults=2&children=0"
+    baseURL + "/home/search?starRate=4&numberOfRooms=1&adults=2&children=0"
   );
+};
+
+export const amenities = async () => {
+  return await fetch(baseURL + "/search-results/amenities");
 };
