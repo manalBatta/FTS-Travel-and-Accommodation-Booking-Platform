@@ -7,7 +7,10 @@ const HomePage = () => {
     <div className="home-page">
       <header className="header-container">
         <Navbar></Navbar>
-        <SearchBar></SearchBar>
+        <div className="search-container">
+          <h1>Discover the most engaging places</h1>
+          <SearchBar></SearchBar>
+        </div>
       </header>
       <main>main content</main>
       <footer>footer copy write manal</footer>

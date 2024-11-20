@@ -5,7 +5,7 @@ import "./LoginForm.css";
 import "./loginButton.css";
 
 import { LoginValidationSchema } from "./constants";
-import { loginLoader, User } from "../../../APIs";
+import { login, readFromReader, User } from "../../../APIs";
 
 const LoginForm = () => {
   let navigate = useNavigate();
@@ -20,8 +20,10 @@ const LoginForm = () => {
       onSubmit={async (user: User, { setSubmitting }: FormikHelpers<User>) => {
         setSubmitting(true);
         try {
-          const res = await loginLoader(user);
+          const res = await login(user);
           if (res?.ok || true) {
+            const reader = res?.body?.getReader();
+            readFromReader(reader);
             navigate("/", { replace: true });
           }
         } catch (error) {

@@ -1,12 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./components/HomePage";
 import ErrorPage from "./error-page";
 import LoginPage from "./components/LoginPage";
+import SearchResultsPage from "./components/SearchResultsPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +17,11 @@ const router = createBrowserRouter([
   {
     path: "/auth/login",
     element: <LoginPage></LoginPage>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/search-results/amenities",
+    element: <SearchResultsPage></SearchResultsPage>,
     errorElement: <ErrorPage></ErrorPage>,
   },
 ]);

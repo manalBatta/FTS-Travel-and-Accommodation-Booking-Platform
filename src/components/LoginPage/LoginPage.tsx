@@ -3,9 +3,7 @@ import "./LoginPage.css";
 const LoginPage = () => {
   return (
     <div className="LoginContainer">
-      <section className="cover-img-container">
-        {/* <img src="cover.png" alt="Earth view from the space " /> */}
-      </section>
+      <section className="cover-img-container"></section>
       <section className="form-container">
         <header className="welcome-header">
           <h1>Welcome back!</h1>

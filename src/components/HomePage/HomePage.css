@@ -6,4 +6,19 @@
   background-image: url("/public/homeCover.jpg");
   /* To Solve:backgound image size is too big loading is taking time */
   background-size: cover;
+
+  .search-container {
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    h1 {
+      color: white;
+      text-align: center;
+      font-size: 3rem;
+      font-weight: 500;
+    }
+  }
 }
