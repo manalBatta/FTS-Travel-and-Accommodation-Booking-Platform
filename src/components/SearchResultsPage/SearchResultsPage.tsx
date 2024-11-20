@@ -11,20 +11,35 @@ import { amenities, readFromReader, search, SearchDetails } from "../../APIs";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { useLocation } from "react-router-dom";
-type amenity = {
+type Amenity = {
+  id: number;
   name: string;
   description: string;
+};
+
+type Hotel = {
+  hotelId: number;
+  amenities: Amenity[];
+  cityName: string;
+  discount: number;
+  hotelName: string;
+  latitude: number;
+  longitude: number;
+  roomPhotoUrl: string;
+  roomPrice: number;
+  roomType: string;
+  starRating: number;
 };
 const SearchResultsPage = () => {
   const location = useLocation();
   const params = new URLSearchParams(location.search);
-  const searchDetails = JSON.parse(
-    decodeURIComponent(params.get("filter") || "{}")
-  );
 
   const [collapse, setCollapse] = useState(true);
-  const [amenitiesList, setAmenitiesList] = useState<amenity[]>([]);
-
+  const [amenitiesList, setAmenitiesList] = useState<Amenity[]>([]);
+  const [searchDetails, setSearchDetails] = useState<SearchDetails>(
+    JSON.parse(decodeURIComponent(params.get("filter") || "{}"))
+  );
+  const [hotels, setHotels] = useState<Hotel[]>([]);
   const getAmenities = async () => {
     const response = await amenities();
     const result: string | undefined = await readFromReader(response.clone());
@@ -52,11 +67,14 @@ const SearchResultsPage = () => {
     const result: string | undefined = await readFromReader(response);
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
+    setHotels(hotelsSearchResult);
     console.log(
       "hotel search result from search result page",
       hotelsSearchResult
     );
   };
+
+  let tempAmenities = "";
   return (
     <>
       <div className="search-result-container">
@@ -116,32 +134,49 @@ const SearchResultsPage = () => {
           </section>
 
           <ul className="result-body">
-            <li className="hotel">
-              <img src="/cover.png" alt="Hotel gallery" className="hotel-img" />
-              <h3 className="hotel-name">the Peoples brownstone</h3>
-              <button className="like-btn">
-                <IoHeartOutline />
-              </button>
-              <h4 className="hotel-location">
-                <IoLocationOutline style={{ fontSize: "1rem" }} />
-                1995 Broadway, New York
-              </h4>
-              <span className="hotel-amenities">
-                Wifi • Air conditioning • Kitchen • Heating • Smokers • Parking
-                • Balcony • Animal friendly
-              </span>
-              <h5 className="rate">
-                4.0
-                <IoMdStar />
-                <IoMdStar />
-                <IoMdStar />
-                <IoMdStar />
-                <IoMdStar style={{ color: "#2b67f61f" }} />
-              </h5>
-              <h5 className="price">
-                $3,000 <span className="note">/month</span>
-              </h5>
-            </li>
+            {hotels?.length &&
+              hotels.map((hotel) => {
+                return (
+                  <li className="hotel" key={hotel.hotelId.toString()}>
+                    <img
+                      src={hotel.roomPhotoUrl}
+                      alt="Hotel gallery"
+                      className="hotel-img"
+                    />
+                    <h3 className="hotel-name">{hotel.hotelName}</h3>
+                    <button className="like-btn">
+                      <IoHeartOutline />
+                    </button>
+                    <h4 className="hotel-location">
+                      <IoLocationOutline style={{ fontSize: "1rem" }} />
+                      {hotel.cityName}
+                    </h4>
+                    <span className="hotel-amenities">
+                      {hotel.amenities
+                        .map((amenity: Amenity) => amenity.name)
+                        .join(" • ")}
+                    </span>
+                    <h5 className="rate">
+                      {hotel.starRating.toString()}
+                      {Array(5)
+                        .fill(null)
+                        .map((_, index) => (
+                          <IoMdStar
+                            key={index}
+                            style={{
+                              color:
+                                index < hotel.starRating ? "gold" : "#2b67f61f",
+                            }}
+                          />
+                        ))}
+                    </h5>
+                    <h5 className="price">
+                      ${hotel.roomPrice.toString()}
+                      <span className="note">/night</span>
+                    </h5>
+                  </li>
+                );
+              })}
           </ul>
         </article>
       </div>

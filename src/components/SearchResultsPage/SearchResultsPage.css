@@ -152,6 +152,7 @@
         height: 200px;
         padding: 2%;
         border-radius: 12px;
+        margin-bottom: 10px;
 
         .hotel-img {
           grid-area: hImg;
