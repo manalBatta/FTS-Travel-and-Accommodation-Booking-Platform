@@ -21,8 +21,16 @@ const LoginForm = () => {
         setSubmitting(true);
         try {
           const response = await login(user);
-          if (response?.ok || true) {
-            readFromReader(response);
+          if (response?.ok) {
+            const result: string | undefined = await readFromReader(
+              response.clone()
+            );
+            if (!result) {
+              throw new Error("The response body is undefined or empty.");
+            }
+            const value = JSON.parse(result);
+            console.log("from result", value);
+
             navigate("/", { replace: true });
           }
         } catch (error) {

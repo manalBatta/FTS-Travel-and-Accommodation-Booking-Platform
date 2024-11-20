@@ -49,9 +49,8 @@ export const login = async (user: User) => {
 };
 
 export const search = async (searchDetails: SearchDetails) => {
-  return await fetch(
-    baseURL + "/home/search?starRate=4&numberOfRooms=1&adults=2&children=0"
-  );
+  const searchUrl = `/home/search?checkInDate=${searchDetails.checkInDate}&checkOutDate=${searchDetails.checkOutDate}&city=${searchDetails.city}&numberOfRooms=${searchDetails.numberOfRooms}&adults=${searchDetails.adults}&children=${searchDetails.children}`;
+  return await fetch(baseURL + searchUrl);
 };
 
 export const amenities = async () => {

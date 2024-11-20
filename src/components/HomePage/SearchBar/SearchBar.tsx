@@ -4,6 +4,7 @@ import { PiBabyLight } from "react-icons/pi";
 import "./SearchBar.css";
 import { useState } from "react";
 import { readFromReader, search, SearchDetails } from "../../../APIs";
+import { Link } from "react-router-dom";
 
 const SearchBar = () => {
   const todayStr = new Date().toISOString().split("T")[0];
@@ -20,11 +21,6 @@ const SearchBar = () => {
     children: 1,
   });
 
-  const getSearchResult = async () => {
-    const response = await search(searchDetails);
-    readFromReader(response);
-  };
-
   const changeSearchDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
     const key = event.target.name as keyof SearchDetails;
     const value =
@@ -38,9 +34,13 @@ const SearchBar = () => {
 
   return (
     <section className="search-bar">
-      <button type="submit" onClick={getSearchResult} className="search-icon">
+      <Link
+        to={`/search-results/amenities?filter=${encodeURIComponent(
+          JSON.stringify(searchDetails)
+        )}`}
+        className="search-icon">
         <IoIosSearch />
-      </button>
+      </Link>
       <input
         type="text"
         placeholder="Search for hotels, cities..."
