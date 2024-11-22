@@ -5,7 +5,7 @@ import "./LoginForm.css";
 import "./loginButton.css";
 import { LoginValidationSchema } from "./constants";
 import { login, readFromReader } from "../../../APIs";
-import { User } from "../../../types";
+import { User } from "../../../Types";
 
 const LoginForm = () => {
   let navigate = useNavigate();

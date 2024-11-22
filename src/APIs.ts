@@ -1,4 +1,4 @@
-import * as types from "./types";
+import * as types from "./Types";
 const baseURL =
   "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
 

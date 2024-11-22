@@ -3,7 +3,7 @@ import { GoPeople } from "react-icons/go";
 import { PiBabyLight } from "react-icons/pi";
 import "./SearchBar.css";
 import { useState } from "react";
-import { SearchDetails, SearchDetailsInitialValue } from "../../../types";
+import { SearchDetails, SearchDetailsInitialValue } from "../../../Types";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {

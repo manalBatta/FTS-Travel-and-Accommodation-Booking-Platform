@@ -8,7 +8,7 @@ import {
 } from "react-icons/rx";
 import { PiElevatorLight, PiStarHalfLight } from "react-icons/pi";
 import { amenities, readFromReader, search, searchForAHotel } from "../../APIs";
-import { SearchHotel } from "../../types";
+import { SearchHotel } from "../../Types";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { useLocation } from "react-router-dom";
