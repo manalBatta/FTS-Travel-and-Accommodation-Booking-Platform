@@ -7,14 +7,8 @@ import {
   RxSketchLogo,
 } from "react-icons/rx";
 import { PiElevatorLight, PiStarHalfLight } from "react-icons/pi";
-import {
-  amenities,
-  readFromReader,
-  search,
-  SearchDetails,
-  searchForAHotel,
-  SearchHotel,
-} from "../../APIs";
+import { amenities, readFromReader, search, searchForAHotel } from "../../APIs";
+import { SearchHotel } from "../../types";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { useLocation } from "react-router-dom";

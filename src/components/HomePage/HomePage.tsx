@@ -1,3 +1,4 @@
+import FeaturedDeals from "./FeaturedDeals";
 import "./HomePage.css";
 import Navbar from "./Navbar/Navbar";
 import SearchBar from "./SearchBar/SearchBar";
@@ -12,7 +13,11 @@ const HomePage = () => {
           <SearchBar></SearchBar>
         </div>
       </header>
-      <main>main content</main>
+      <main>
+        <article>
+          <FeaturedDeals></FeaturedDeals>
+        </article>
+      </main>
       <footer>footer copy write manal</footer>
     </div>
   );

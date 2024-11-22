@@ -3,9 +3,9 @@ import { Formik, Field, FormikHelpers, Form } from "formik";
 import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 import "./loginButton.css";
-
 import { LoginValidationSchema } from "./constants";
-import { login, readFromReader, User } from "../../../APIs";
+import { login, readFromReader } from "../../../APIs";
+import { User } from "../../../types";
 
 const LoginForm = () => {
   let navigate = useNavigate();
