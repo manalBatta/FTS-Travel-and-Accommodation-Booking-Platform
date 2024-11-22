@@ -1,6 +1,6 @@
 .search-result-container {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   display: grid;
   grid-template-areas:
     "sidebar searchBar "
@@ -78,17 +78,18 @@
         select {
           font-size: 1.1rem;
           height: 100%;
-          width: 50%;
+          width: 70%;
           border: none;
           padding: 1%;
           background-color: transparent;
         }
+
         input:focus,
         select:focus {
           outline: none;
         }
         input::placeholder {
-          color: black;
+          color: rgb(92, 92, 92);
         }
 
         button {
@@ -110,6 +111,7 @@
     width: 92%;
     border-radius: 12px;
     margin-bottom: 1%;
+    overflow: hidden;
 
     .result-header {
       display: flex;
@@ -119,6 +121,7 @@
       h2 {
         font-weight: 400;
         font-size: 1.1rem;
+        flex-grow: 2;
       }
       select {
         font-size: 1rem;
@@ -132,11 +135,36 @@
       select:focus {
         outline: none;
       }
+      .star-rate {
+        width: 15%;
+        display: flex;
+        align-items: center;
+        input {
+          font-size: 1.1rem;
+          height: fit-content;
+          width: 70%;
+          border: none;
+          background-color: transparent;
+        }
+
+        input::placeholder {
+          color: rgb(92, 92, 92);
+          font-size: 0.9rem;
+        }
+
+        svg {
+          font-size: 1.3rem;
+        }
+      }
     }
 
     .result-body {
       list-style-type: none;
       width: 80%;
+      overflow-y: scroll;
+      scrollbar-width: none;
+      height: 70%;
+      padding-bottom: 50px;
       .hotel {
         display: grid;
         grid-template-areas:
@@ -153,7 +181,7 @@
         padding: 2%;
         border-radius: 12px;
         margin-bottom: 10px;
-
+        min-height: fit-content;
         .hotel-img {
           grid-area: hImg;
           box-sizing: border-box;

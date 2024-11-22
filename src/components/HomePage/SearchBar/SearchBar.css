@@ -18,19 +18,20 @@
     padding: 1%;
     border-radius: 12px;
     font-size: 1.5rem;
-    min-width: 15px;
+    min-width: 22px;
     border: none;
-    height: 45px;
+    height: 23px;
   }
   .search-input {
     height: 45px;
     box-sizing: border-box;
     padding: 1%;
-    flex-grow: 1;
     background-color: var(--Secondary);
     border: none;
     border-radius: 12px;
     color: var(--Text);
+    width: 100%;
+    max-width: 600px;
   }
   .search-input::placeholder {
     color: var(--Text);
@@ -39,6 +40,7 @@
     outline: none;
   }
   .search-details {
+    min-width: 160px;
     h2 {
       box-sizing: border-box;
       margin: 0 2px 5px 2px;
@@ -50,7 +52,6 @@
     input {
       margin: 0;
       padding: 0 15px;
-      width: 100%;
       display: inline;
     }
   }
@@ -75,8 +76,11 @@
     }
   }
   .rooms-details {
-    width: fit-content;
-    max-width: 67px;
+    width: 20%;
+    min-width: 40px;
+    input {
+      width: 100%;
+    }
   }
 }
 @media screen and (max-width: 830px) {

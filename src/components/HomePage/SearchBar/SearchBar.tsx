@@ -3,23 +3,13 @@ import { GoPeople } from "react-icons/go";
 import { PiBabyLight } from "react-icons/pi";
 import "./SearchBar.css";
 import { useState } from "react";
-import { readFromReader, search, SearchDetails } from "../../../APIs";
+import { SearchDetails, SearchDetailsInitialValue } from "../../../APIs";
 import { Link } from "react-router-dom";
 
 const SearchBar = () => {
-  const todayStr = new Date().toISOString().split("T")[0];
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  const tomorrowStr = tomorrow.toISOString().split("T")[0];
-
-  const [searchDetails, setSearchDetails] = useState<SearchDetails>({
-    checkInDate: todayStr,
-    checkOutDate: tomorrowStr,
-    city: "",
-    numberOfRooms: 1,
-    adults: 2,
-    children: 1,
-  });
+  const [searchDetails, setSearchDetails] = useState<SearchDetails>(
+    SearchDetailsInitialValue
+  );
 
   const changeSearchDetails = (event: React.ChangeEvent<HTMLInputElement>) => {
     const key = event.target.name as keyof SearchDetails;
@@ -35,9 +25,8 @@ const SearchBar = () => {
   return (
     <section className="search-bar">
       <Link
-        to={`/search-results/amenities?filter=${encodeURIComponent(
-          JSON.stringify(searchDetails)
-        )}`}
+        to={"/search-results/amenities"}
+        state={searchDetails}
         className="search-icon">
         <IoIosSearch />
       </Link>

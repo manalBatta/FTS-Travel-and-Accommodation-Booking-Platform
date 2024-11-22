@@ -7,10 +7,18 @@ import {
   RxSketchLogo,
 } from "react-icons/rx";
 import { PiElevatorLight, PiStarHalfLight } from "react-icons/pi";
-import { amenities, readFromReader, search, SearchDetails } from "../../APIs";
+import {
+  amenities,
+  readFromReader,
+  search,
+  SearchDetails,
+  searchForAHotel,
+  SearchHotel,
+} from "../../APIs";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { useLocation } from "react-router-dom";
+import { MdOutlineManageSearch } from "react-icons/md";
 type Amenity = {
   id: number;
   name: string;
@@ -29,18 +37,26 @@ type Hotel = {
   roomPrice: number;
   roomType: string;
   starRating: number;
+  description: string;
 };
+
 const SearchResultsPage = () => {
   const location = useLocation();
-  const params = new URLSearchParams(location.search);
-
   const [collapse, setCollapse] = useState(true);
   const [amenitiesList, setAmenitiesList] = useState<Amenity[]>([]);
-  const [searchDetails, setSearchDetails] = useState<SearchDetails>(
-    JSON.parse(decodeURIComponent(params.get("filter") || "{}"))
-  );
   const [hotels, setHotels] = useState<Hotel[]>([]);
-  const getAmenities = async () => {
+  const [specificSearch, setSpecificSearch] = useState({
+    starRate: 5,
+    sort: "desc",
+  });
+  const [hotelSearch, setHotelSearch] = useState<SearchHotel>({
+    name: "",
+    description: "",
+    pageSize: 10,
+    pageNumber: 1,
+  });
+
+  const getAmenitiesOptions = async () => {
     const response = await amenities();
     const result: string | undefined = await readFromReader(response.clone());
 
@@ -51,30 +67,54 @@ const SearchResultsPage = () => {
     setAmenitiesList(value);
   };
 
-  const applyFilter = () => {
-    const filter = document.getElementById("amenities") as HTMLSelectElement;
-    const selectedValue = filter?.value;
-    if (selectedValue !== "Amenities")
-      console.log("Selected value:", selectedValue);
-  };
-  useEffect(() => {
-    getAmenities();
-    getSearchResult();
-  }, []);
-
-  const getSearchResult = async () => {
-    const response = await search(searchDetails);
+  const applyFilter = async () => {
+    // const filter = document.getElementById("amenities") as HTMLSelectElement;
+    // const selectedValue = filter?.value;
+    // if (selectedValue !== "Amenities")
+    //   console.log("Selected value:", selectedValue);
+    const response = await searchForAHotel(hotelSearch);
     const result: string | undefined = await readFromReader(response);
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
     setHotels(hotelsSearchResult);
     console.log(
-      "hotel search result from search result page",
+      "search for ",
+      hotelSearch,
+      "get the result",
       hotelsSearchResult
     );
   };
 
-  let tempAmenities = "";
+  useEffect(() => {
+    getAmenitiesOptions();
+  }, []);
+
+  useEffect(() => {
+    getSearchResult();
+    console.log("triggered change");
+  }, [location, specificSearch]);
+
+  const getSearchResult = async () => {
+    const searchParams = { ...location.state, ...specificSearch };
+    const response = await search(searchParams);
+    const result: string | undefined = await readFromReader(response);
+    if (!result) throw new Error("search result is undefined");
+    const hotelsSearchResult = JSON.parse(result);
+    setHotels(hotelsSearchResult);
+  };
+
+  //sorting hotels by stare rating,price
+  hotels.sort((a, b) => {
+    const key = specificSearch.sort;
+
+    if (key === "starRating") {
+      return b.starRating - a.starRating;
+    }
+    if (key === "roomPrice") {
+      return a.roomPrice - b.roomPrice;
+    }
+    return 0;
+  });
   return (
     <>
       <div className="search-result-container">
@@ -113,38 +153,96 @@ const SearchResultsPage = () => {
                   ))}
               </select>
             </li>
-            <li>
-              <PiElevatorLight style={{ color: "#CD6D00" }} />{" "}
-              <input type="text" placeholder="Hotel" />
+            <li style={{ borderBottom: "none" }}>
+              <PiElevatorLight style={{ color: "#CD6D00" }} />
+              <input
+                type="text"
+                placeholder="Hotel Name"
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") applyFilter();
+                }}
+                onChange={(e) =>
+                  setHotelSearch((prev) => {
+                    return { ...prev, name: e.target.value.toString() };
+                  })
+                }
+              />
             </li>
             <li>
+              <MdOutlineManageSearch />
+              <input
+                type="text"
+                placeholder=" description..."
+                onChange={(e) =>
+                  setHotelSearch((prev) => {
+                    return { ...prev, description: e.target.value };
+                  })
+                }
+              />
+            </li>
+            {/* <li>
               <PiStarHalfLight style={{ color: "#ecbe09" }} />
-              <input type="text" placeholder="Stars Rate" />
-            </li>
+              <input
+                type="number"
+                min={1}
+                max={5}
+                placeholder="Stars Rate"
+                onChange={(e) =>
+                  setSpecificSearch((prev) => {
+                    return { ...prev, starRate: Number(e.target.value) };
+                  })
+                }
+              />
+            </li> */}
           </ul>
         </article>
         <article className="result">
           <section className="result-header">
             <h2>Search Results</h2>
-            <select name="sort" id="sort">
-              <option value="ascending">Sort by</option>
-              <option value="ascending">ascending</option>
-              <option value="ascending">ascending</option>
+            <div className="star-rate">
+              <PiStarHalfLight style={{ color: "#ecbe09" }} />
+              <input
+                type="number"
+                min={1}
+                max={5}
+                placeholder="Stars Rate"
+                onChange={(e) =>
+                  setSpecificSearch((prev) => {
+                    return { ...prev, starRate: Number(e.target.value) };
+                  })
+                }
+              />
+            </div>
+            <select
+              name="sort"
+              id="sort"
+              onChange={(e) =>
+                setSpecificSearch((prev) => {
+                  return { ...prev, sort: e.target.value };
+                })
+              }>
+              <option value="roomPrice">Sort By</option>
+              <option value="starRating">star Rate</option>
+              <option value="roomPrice">price</option>
             </select>
           </section>
 
           <ul className="result-body">
             {hotels?.length &&
               hotels.map((hotel) => {
+                if (hotel.starRating < specificSearch.starRate) return ""; // client side filtering (due to server side issue filter is not working)
+
                 return (
-                  <li className="hotel" key={hotel.hotelId.toString()}>
+                  <li className="hotel" key={hotel?.hotelId?.toString()}>
                     <img
-                      src={hotel.roomPhotoUrl}
+                      src={hotel.roomPhotoUrl || "/default.jpg"}
                       alt="Hotel gallery"
                       className="hotel-img"
                     />
-                    <h3 className="hotel-name">{hotel.hotelName}</h3>
-                    <button className="like-btn">
+                    <h3 className="hotel-name">
+                      {hotel.hotelName || hotel.description}
+                    </h3>
+                    <button className="like-btn ">
                       <IoHeartOutline />
                     </button>
                     <h4 className="hotel-location">
@@ -152,12 +250,13 @@ const SearchResultsPage = () => {
                       {hotel.cityName}
                     </h4>
                     <span className="hotel-amenities">
-                      {hotel.amenities
-                        .map((amenity: Amenity) => amenity.name)
+                      {hotel?.amenities
+                        ?.map((amenity: Amenity) => amenity.name)
                         .join(" • ")}
                     </span>
+
                     <h5 className="rate">
-                      {hotel.starRating.toString()}
+                      {hotel?.starRating?.toString()}
                       {Array(5)
                         .fill(null)
                         .map((_, index) => (
@@ -170,10 +269,11 @@ const SearchResultsPage = () => {
                           />
                         ))}
                     </h5>
-                    <h5 className="price">
-                      ${hotel.roomPrice.toString()}
+                    <h6 className="price">
+                      {/* To fix error undefined to string when search */}$
+                      {hotel?.roomPrice?.toString()}
                       <span className="note">/night</span>
-                    </h5>
+                    </h6>
                   </li>
                 );
               })}
