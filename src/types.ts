@@ -16,6 +16,30 @@ const tomorrow = new Date();
 tomorrow.setDate(tomorrow.getDate() + 1);
 const tomorrowStr = tomorrow.toISOString().split("T")[0];
 
+export type Amenity = {
+  id: number;
+  name: string;
+  description: string;
+};
+
+export type Hotel = {
+  hotelId: number;
+  amenities: Amenity[];
+  cityName: string;
+  discount: number;
+  hotelName: string;
+  latitude: number;
+  longitude: number;
+  roomPhotoUrl: string;
+  roomPrice: number;
+  roomType: string;
+  starRating: number;
+  description: string;
+  visitDate: string;
+  priceLowerBound: number;
+  priceUpperBound: number;
+};
+
 export interface User {
   username: string;
   password: string;

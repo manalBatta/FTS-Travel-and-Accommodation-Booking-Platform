@@ -8,31 +8,11 @@ import {
 } from "react-icons/rx";
 import { PiElevatorLight, PiStarHalfLight } from "react-icons/pi";
 import { amenities, readFromReader, search, searchForAHotel } from "../../APIs";
-import { SearchHotel } from "../../Types";
-import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
-import { IoMdStar } from "react-icons/io";
+import { SearchHotel, Hotel, Amenity } from "../../Types";
+
 import { useLocation } from "react-router-dom";
 import { MdOutlineManageSearch } from "react-icons/md";
-type Amenity = {
-  id: number;
-  name: string;
-  description: string;
-};
-
-type Hotel = {
-  hotelId: number;
-  amenities: Amenity[];
-  cityName: string;
-  discount: number;
-  hotelName: string;
-  latitude: number;
-  longitude: number;
-  roomPhotoUrl: string;
-  roomPrice: number;
-  roomType: string;
-  starRating: number;
-  description: string;
-};
+import HotelCard from "../HotelCard/HotelCard";
 
 const SearchResultsPage = () => {
   const location = useLocation();
@@ -224,52 +204,9 @@ const SearchResultsPage = () => {
           <ul className="result-body">
             {hotels?.length &&
               hotels.map((hotel) => {
-                if (hotel.starRating < specificSearch.starRate) return ""; // client side filtering (due to server side issue filter is not working)
-
-                return (
-                  <li className="hotel" key={hotel?.hotelId?.toString()}>
-                    <img
-                      src={hotel.roomPhotoUrl || "/default.jpg"}
-                      alt="Hotel gallery"
-                      className="hotel-img"
-                    />
-                    <h3 className="hotel-name">
-                      {hotel.hotelName || hotel.description}
-                    </h3>
-                    <button className="like-btn ">
-                      <IoHeartOutline />
-                    </button>
-                    <h4 className="hotel-location">
-                      <IoLocationOutline style={{ fontSize: "1rem" }} />
-                      {hotel.cityName}
-                    </h4>
-                    <span className="hotel-amenities">
-                      {hotel?.amenities
-                        ?.map((amenity: Amenity) => amenity.name)
-                        .join(" • ")}
-                    </span>
-
-                    <h5 className="rate">
-                      {hotel?.starRating?.toString()}
-                      {Array(5)
-                        .fill(null)
-                        .map((_, index) => (
-                          <IoMdStar
-                            key={index}
-                            style={{
-                              color:
-                                index < hotel.starRating ? "gold" : "#2b67f61f",
-                            }}
-                          />
-                        ))}
-                    </h5>
-                    <h6 className="price">
-                      {/* To fix error undefined to string when search */}$
-                      {hotel?.roomPrice?.toString()}
-                      <span className="note">/night</span>
-                    </h6>
-                  </li>
-                );
+                if (hotel.starRating < specificSearch.starRate) return "";
+                // Client side filtering -due to server side issue filter is not working-.
+                return <HotelCard hotel={hotel}></HotelCard>;
               })}
           </ul>
         </article>
