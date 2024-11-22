@@ -6,9 +6,11 @@ import "./loginButton.css";
 import { LoginValidationSchema } from "./constants";
 import { login, readFromReader } from "../../../APIs";
 import { User } from "../../../Types";
+import { useAuth } from "../../context/auth";
 
 const LoginForm = () => {
   let navigate = useNavigate();
+  const { setAuthTokens } = useAuth();
 
   return (
     <Formik
@@ -29,7 +31,9 @@ const LoginForm = () => {
               throw new Error("The response body is undefined or empty.");
             }
             const value = JSON.parse(result);
-            console.log("from result", value);
+            setAuthTokens(value);
+
+            console.log("from Login form user=", value);
 
             navigate("/", { replace: true });
           }

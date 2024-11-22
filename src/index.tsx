@@ -2,36 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "./components/HomePage";
-import ErrorPage from "./error-page";
-import LoginPage from "./components/LoginPage";
-import SearchResultsPage from "./components/SearchResultsPage";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage></HomePage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/auth/login",
-    element: <LoginPage></LoginPage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-  {
-    path: "/search-results/amenities",
-    element: <SearchResultsPage></SearchResultsPage>,
-    errorElement: <ErrorPage></ErrorPage>,
-  },
-]);
+import App from "./App";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <App></App>
   </React.StrictMode>
 );
 
