@@ -1,3 +1,4 @@
+import { motion } from "motion/react";
 import FeaturedDeals from "./FeaturedDeals";
 import "./HomePage.css";
 import Navbar from "./Navbar/Navbar";
@@ -14,11 +15,19 @@ const HomePage = () => {
         </div>
       </header>
       <main>
-        <article>
+        <motion.article
+          className="featured-deals-container"
+          id="Featured"
+          initial={{ backgroundColor: "black", opacity: 0 }}
+          whileInView={{
+            backgroundColor: "white",
+            opacity: 1,
+            transition: { duration: 2 },
+          }}>
           <FeaturedDeals></FeaturedDeals>
-        </article>
+        </motion.article>
       </main>
-      <footer>footer copy write manal</footer>
+      <footer></footer>
     </div>
   );
 };

@@ -7,6 +7,9 @@
   /* To Solve:backgound image size is too big loading is taking time */
   background-size: cover;
 
+  .header-container {
+    height: 100vh;
+  }
   .search-container {
     height: 70vh;
     display: flex;
@@ -20,5 +23,9 @@
       font-size: 3rem;
       font-weight: 500;
     }
+  }
+
+  .featured-deals-container {
+    height: 100vh;
   }
 }

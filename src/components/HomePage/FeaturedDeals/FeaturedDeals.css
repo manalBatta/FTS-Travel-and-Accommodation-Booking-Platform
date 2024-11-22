@@ -1,0 +1,14 @@
+.result-header {
+  font-size: 2rem;
+  text-align: center;
+}
+.result-body {
+  list-style-type: none;
+  width: 80%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  height: 70%;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  margin: 0 auto;
+  padding: 0;
+}

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { featuredDeals, readFromReader } from "../../../APIs";
 import { FeaturedDealType } from "../../../Types";
 import FeaturedDeal from "./FeaturedDeal/FeaturedDeal";
+import "./FeaturedDeals.css";
 
 const FeaturedDeals = () => {
   const [featuredDealsList, setFeaturedDealsList] = useState<
@@ -21,14 +22,12 @@ const FeaturedDeals = () => {
   return (
     <>
       <article className="result">
+        <h1 className="result-header">Featured Deals </h1>
         <ul className="result-body">
           {featuredDealsList?.length &&
-            featuredDealsList.map((deal) => {
+            featuredDealsList.map((deal, index) => {
+              if (index >= 3) return "";
               return (
-                // originalRoomPrice: number;
-                // discount: number;
-                // finalPrice: number;
-                // title: string;
                 <FeaturedDeal deal={deal} key={deal.hotelId}></FeaturedDeal>
               );
             })}

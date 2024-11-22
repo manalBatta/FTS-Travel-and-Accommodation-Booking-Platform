@@ -1,95 +1,149 @@
-.result-body {
-  list-style-type: none;
-  width: 80%;
-  overflow-y: scroll;
-  scrollbar-width: none;
-  height: 70%;
-  padding-bottom: 50px;
-  .deal {
-    display: grid;
-    grid-template-areas:
-      "hImg . hName.  like"
-      "hImg . hLoc . n"
-      "hImg . hAmen . n"
-      "hImg . hRate . hPrice";
-    grid-template-columns: 20% 5% 59% 1% 15%;
-    justify-content: start;
-    align-items: center;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.deal {
+  display: grid;
+  grid-template-areas:
+    "hImg . hName.  like"
+    "hImg . hLoc . n"
+    "hImg . hAmen . n"
+    "hImg . hRate . hPrice";
+  grid-template-columns: 20% 5% 59% 1% 15%;
+  justify-content: start;
+  align-items: center;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  box-sizing: border-box;
+  height: 200px;
+  padding: 2%;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  min-height: fit-content;
+
+  .deal-img {
+    grid-area: hImg;
     box-sizing: border-box;
-    height: 200px;
-    padding: 2%;
-    border-radius: 12px;
-    margin-bottom: 10px;
-    min-height: fit-content;
-    .deal-img {
-      grid-area: hImg;
-      box-sizing: border-box;
-      width: 100%;
-      height: 80%;
-      border-radius: 20px;
-      margin-right: 10px;
+    width: 100%;
+    height: 80%;
+    border-radius: 20px;
+    margin-right: 10px;
+  }
+
+  .deal-name {
+    grid-area: hName;
+    text-transform: capitalize;
+    font-weight: 500;
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    .discount-label {
+      padding: 2px;
+      position: relative;
+      float: left;
+      margin-top: 35px;
+      margin-left: 60px;
+      width: 50px;
+      -webkit-border-radius: 0 4px 0 4px;
+      -moz-border-radius: 0 4px 0 4px;
+      border-radius: 0 4px 4px 0;
     }
 
-    .deal-name {
-      grid-area: hName;
-      font-size: 1.6rem;
-      text-transform: capitalize;
-      font-weight: 500;
+    .discount-label:after {
+      right: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      border-color: rgba(136, 183, 213, 0);
+      border-width: 15px;
+      top: 50%;
+      margin-top: -14px;
     }
-    .like-btn {
-      grid-area: like;
-      border: none;
-      background-color: transparent;
-      color: #6b6f7b;
-      font-size: 1.3rem;
+
+    .discount-label:before {
+      content: "";
+      z-index: 2;
+      position: absolute;
+      top: 42%;
+      right: 100%;
+      width: 7px;
+      height: 7px;
+      opacity: 0.95;
+      background: #ffffff;
+      border-radius: 7px;
+      -webkit-box-shadow: inset 0.5px 0 rgba(0, 0, 0, 0.6);
+      box-shadow: inset 0.5px 0 rgba(0, 0, 0, 0.6);
+    }
+
+    .discount-label span {
+      color: #ffffff;
       text-align: center;
-      width: 100%;
-      height: 100%;
-      svg {
-        margin-top: 2px;
-      }
+      font-family: "Raleway", Helvetica;
+      font-size: 1.2rem;
     }
-    .deal-location {
-      grid-area: hLoc;
-      font-size: 0.9rem;
-      text-transform: capitalize;
-      font-weight: 400;
+
+    .red {
+      background-color: #e80707;
     }
-    .deal-amenities {
-      grid-area: hAmen;
-      list-style-type: disc;
-      display: flex;
+
+    .red:after {
+      border-right-color: #e80707;
+    }
+  }
+  .like-btn {
+    grid-area: like;
+    border: none;
+    background-color: transparent;
+    color: #6b6f7b;
+    font-size: 1.3rem;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    svg {
+      margin-top: 2px;
+    }
+  }
+  .deal-location {
+    grid-area: hLoc;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+    font-weight: 400;
+  }
+  .deal-amenities {
+    grid-area: hAmen;
+    list-style-type: disc;
+    display: flex;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    font-weight: 400;
+    color: #6b6f7b;
+  }
+  .rate {
+    grid-area: hRate;
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    svg {
+      font-size: 1.3rem;
+      color: gold;
+    }
+  }
+  .price {
+    grid-area: hPrice;
+    display: inline;
+    font-size: 1.6rem;
+    font-weight: 700;
+    .note {
+      color: #333333;
       font-size: 0.8rem;
-      text-transform: capitalize;
       font-weight: 400;
+    }
+    .original-price {
+      text-decoration: line-through;
       color: #6b6f7b;
-    }
-    .rate {
-      grid-area: hRate;
-      display: flex;
-      align-items: center;
-      font-size: 1.4rem;
-      font-weight: 700;
-      svg {
-        font-size: 1.3rem;
-        color: gold;
-      }
-    }
-    .price {
-      grid-area: hPrice;
-      display: inline;
-      font-size: 1.4rem;
-      font-weight: 700;
-      .note {
-        color: #333333;
-        font-size: 0.8rem;
-        font-weight: 400;
-      }
+      font-size: 1rem;
     }
   }
-  .deal > *:not(.deal-img) {
-    margin: 0;
-    padding: 0;
-  }
+}
+.deal > *:not(.deal-img) {
+  margin: 0;
+  padding: 0;
 }
