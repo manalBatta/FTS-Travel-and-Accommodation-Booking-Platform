@@ -25,7 +25,10 @@
     }
   }
 
-  .featured-deals-container {
+  .featured-deals-container,
+  .recent-hotels-container,
+  .trending-destinations-container {
     height: 100vh;
+    min-height: fit-content;
   }
 }

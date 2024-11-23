@@ -65,3 +65,7 @@ export const featuredDeals = async () => {
 export const recentHotels = async (userId: string) => {
   return await fetch(baseURL + `/home/users/${userId}/recent-hotels`);
 };
+
+export const trendingDestinations = async () => {
+  return await fetch(baseURL + "/home/destinations/trending");
+};

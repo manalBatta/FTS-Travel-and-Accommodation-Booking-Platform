@@ -1,4 +1,4 @@
-import "/HotelCard.css";
+import "./HotelCard.css";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { Amenity, Hotel } from "../../Types";
