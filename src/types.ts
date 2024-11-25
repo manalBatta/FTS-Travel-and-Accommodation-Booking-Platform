@@ -40,6 +40,7 @@ export type Hotel = {
   visitDate: string;
   priceLowerBound: number;
   priceUpperBound: number;
+  thumbnailUrl: string;
 };
 
 export interface User {

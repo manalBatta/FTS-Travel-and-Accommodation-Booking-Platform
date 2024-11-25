@@ -1,0 +1,21 @@
+.Recent-container {
+  list-style-type: none;
+  width: 80%;
+  overflow-y: scroll;
+  scrollbar-width: none;
+  padding-bottom: 50px;
+  margin: 0 auto;
+  .Recent-header {
+    text-align: center;
+    font-size: 2rem;
+  }
+  .hotel-img {
+    height: 141px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .Recent-container {
+    width: 98%;
+  }
+}

@@ -10,7 +10,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
   return (
     <li className="hotel" key={hotel?.hotelId?.toString()}>
       <img
-        src={hotel?.roomPhotoUrl || "/default.jpg"}
+        src={hotel?.roomPhotoUrl || hotel?.thumbnailUrl || "/default.jpg"}
         alt="Hotel gallery"
         className="hotel-img"
       />
@@ -43,8 +43,8 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       </h5>
       <h6 className="price">
         {/* To fix error undefined to string when search */}$
-        {hotel?.roomPrice?.toString() || hotel?.priceUpperBound}
-        {"-" + hotel?.priceLowerBound || ""}
+        {hotel?.roomPrice?.toString() || ` ${hotel?.priceUpperBound} -`}
+        {hotel?.priceLowerBound || ""}
         <span className="note">/night</span>
       </h6>
     </li>

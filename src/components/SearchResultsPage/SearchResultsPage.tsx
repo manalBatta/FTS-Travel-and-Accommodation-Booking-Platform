@@ -20,7 +20,7 @@ const SearchResultsPage = () => {
   const [amenitiesList, setAmenitiesList] = useState<Amenity[]>([]);
   const [hotels, setHotels] = useState<Hotel[]>([]);
   const [specificSearch, setSpecificSearch] = useState({
-    starRate: 5,
+    starRate: 1,
     sort: "desc",
   });
   const [hotelSearch, setHotelSearch] = useState<SearchHotel>({
@@ -89,6 +89,7 @@ const SearchResultsPage = () => {
     }
     return 0;
   });
+  console.log("from search result", hotels);
   return (
     <>
       <div className="search-result-container">
@@ -201,12 +202,14 @@ const SearchResultsPage = () => {
             </select>
           </section>
 
-          <ul className="result-body">
+          <ul className="result-body" style={{ boxShadow: "none" }}>
             {hotels?.length &&
               hotels.map((hotel) => {
                 if (hotel.starRating < specificSearch.starRate) return "";
                 // Client side filtering -due to server side issue filter is not working-.
-                return <HotelCard hotel={hotel}></HotelCard>;
+                return (
+                  <HotelCard hotel={hotel} key={hotel.hotelId}></HotelCard>
+                );
               })}
           </ul>
         </article>
