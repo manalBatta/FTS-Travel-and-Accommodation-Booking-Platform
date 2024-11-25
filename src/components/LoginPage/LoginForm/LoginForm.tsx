@@ -30,10 +30,10 @@ const LoginForm = () => {
             if (!result) {
               throw new Error("The response body is undefined or empty.");
             }
-            const value = JSON.parse(result);
             // setAuthTokens(value);
+            localStorage.setItem("auth", result);
 
-            console.log("from Login form user=", value);
+            console.log("from Login form user=", result);
 
             navigate("/", { replace: true });
           }

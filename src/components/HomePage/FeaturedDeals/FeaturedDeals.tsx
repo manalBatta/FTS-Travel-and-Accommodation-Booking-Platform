@@ -17,7 +17,6 @@ const FeaturedDeals = () => {
   useEffect(() => {
     getFeaturedDeals();
   }, []);
-  console.log(JSON.stringify(featuredDealsList));
 
   return (
     <>

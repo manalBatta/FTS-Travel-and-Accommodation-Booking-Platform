@@ -1,3 +1,5 @@
+import { JwtPayload } from "jwt-decode";
+
 export type FeaturedDealType = {
   hotelId: number;
   originalRoomPrice: number;
@@ -45,6 +47,15 @@ export interface User {
   password: string;
 }
 
+export interface Auth extends JwtPayload {
+  exp: number;
+  family_name: string;
+  given_name: string;
+  iss: string;
+  nbf: number;
+  userType: string;
+  user_id: string;
+}
 export interface SearchDetails {
   checkInDate: string;
   checkOutDate: string;

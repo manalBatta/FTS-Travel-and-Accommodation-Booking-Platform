@@ -1,22 +1,26 @@
 import { useEffect, useState } from "react";
 //import { useAuth } from "../../context/auth";
 import { readFromReader, recentHotels } from "../../../APIs";
-import { Hotel } from "../../../Types";
+import { Auth, Hotel } from "../../../Types";
 import HotelCard from "../../HotelCard/HotelCard";
+import { getUser } from "../../../Helpers";
+import { number } from "yup";
 
 const RecentHotels = () => {
   const [recentHotelsList, setRecentHotelsList] = useState<Hotel[]>([]);
-  //const loggedUser = useAuth();
-  //console.log("from Recent Hotels in Home page  the user Id=", loggedUser);
 
-  const getRecent = async (authentication: string) => {
+  //console.log(decoded);
+  //console.log("from Recent Hotels in Home page  the user Id=", authentication);
+
+  const getRecent = async (authentication: number) => {
     const response = await recentHotels(authentication);
     const result = await readFromReader(response);
     if (result) setRecentHotelsList(JSON.parse(result));
   };
-  // useEffect(() => {
-  //   getRecent(loggedUser.authTokens.authentication);
-  // }, []);
+  useEffect(() => {
+    const user: Auth = getUser();
+    getRecent(+user.user_id);
+  }, []);
   return (
     <>
       {recentHotelsList?.length &&

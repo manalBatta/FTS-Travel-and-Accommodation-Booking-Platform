@@ -6,7 +6,7 @@ import HomePage from "./components/HomePage";
 import ErrorPage from "./error-page";
 import LoginPage from "./components/LoginPage";
 import SearchResultsPage from "./components/SearchResultsPage";
-import { AuthContext, AuthTokens } from "./components/context/auth";
+//import { AuthContext, AuthTokens } from "./components/context/auth";
 import { useState } from "react";
 
 const router = createBrowserRouter([
@@ -27,20 +27,22 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  const [authTokens, setAuthTokens] = useState<AuthTokens>({
-    authentication: "none",
-    userType: "user",
-  });
+  // const [authTokens, setAuthTokens] = useState<AuthTokens>({
+  //   authentication: "none",
+  //   userType: "user",
+  // });
 
-  const setTokens = (data: AuthTokens) => {
-    localStorage.setItem("tokens", JSON.stringify(data));
-    setAuthTokens(data);
-  };
+  // const setTokens = (data: AuthTokens) => {
+  //   localStorage.setItem("tokens", JSON.stringify(data));
+  //   setAuthTokens(data);
+  // };
 
   return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
-      <RouterProvider router={router} />
-    </AuthContext.Provider>
+    //   <AuthContext.Provider
+    // value={{ authTokens, setAuthTokens: setTokens }}
+    //  >
+    <RouterProvider router={router} />
+    //    </AuthContext.Provider>
   );
 }
 

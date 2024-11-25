@@ -62,8 +62,27 @@ export const featuredDeals = async () => {
   return await fetch(baseURL + "/home/featured-deals");
 };
 
-export const recentHotels = async (userId: string) => {
-  return await fetch(baseURL + `/home/users/${userId}/recent-hotels`);
+export const recentHotels = async (userId: number) => {
+  const authLocalStorage = localStorage.getItem("auth");
+  const result = authLocalStorage ? JSON.parse(authLocalStorage) : null;
+  const token = result?.authentication;
+
+  if (!token) {
+    throw new Error("Authorization token is missing");
+  }
+
+  console.log(
+    "from request of recent hotels api",
+    `/home/users/${userId}/recent-hotels`
+  );
+
+  return await fetch(baseURL + `/home/users/${userId}/recent-hotels`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
 };
 
 export const trendingDestinations = async () => {
