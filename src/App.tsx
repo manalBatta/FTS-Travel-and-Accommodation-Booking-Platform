@@ -8,6 +8,7 @@ import LoginPage from "./components/LoginPage";
 import SearchResultsPage from "./components/SearchResultsPage";
 //import { AuthContext, AuthTokens } from "./components/context/auth";
 import { useState } from "react";
+import HotelPage from "./components/HotelPage";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
   {
     path: "/search-results/amenities",
     element: <SearchResultsPage></SearchResultsPage>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/hotels/:id",
+    element: <HotelPage></HotelPage>,
     errorElement: <ErrorPage></ErrorPage>,
   },
 ]);

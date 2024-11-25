@@ -78,7 +78,7 @@ const SearchResultsPage = () => {
   };
 
   //sorting hotels by stare rating,price
-  hotels.sort((a, b) => {
+  hotels?.sort((a, b) => {
     const key = specificSearch.sort;
 
     if (key === "starRating") {

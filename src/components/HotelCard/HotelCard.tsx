@@ -2,6 +2,7 @@ import "./HotelCard.css";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { Amenity, Hotel } from "../../Types";
+import { Link } from "react-router-dom";
 
 interface HotelCardProps extends React.HTMLAttributes<HTMLDivElement> {
   hotel: Hotel;
@@ -16,7 +17,7 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       />
       <h3 className="hotel-name">{hotel?.hotelName || hotel.description}</h3>
       <button className="like-btn ">
-        <IoHeartOutline />
+        <Link to={`/hotels/${hotel?.hotelId}`}>Book no</Link> <IoHeartOutline />
       </button>
       <h4 className="hotel-location">
         <IoLocationOutline style={{ fontSize: "1rem" }} />
