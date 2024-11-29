@@ -88,3 +88,11 @@ export const recentHotels = async (userId: number) => {
 export const trendingDestinations = async () => {
   return await fetch(baseURL + "/home/destinations/trending");
 };
+
+export const hotel = async (hotelId: number) => {
+  return await fetch(baseURL + `/hotels/${hotelId}`);
+};
+
+export const hotelGallery = async (hotelId: number) => {
+  return await fetch(baseURL + `/hotels/${hotelId}/gallery`);
+};

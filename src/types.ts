@@ -24,9 +24,14 @@ export type Amenity = {
   description: string;
 };
 
-export type Hotel = {
+export interface Photo {
+  url: string;
+  id: string;
+}
+export interface Hotel {
   hotelId: number;
   amenities: Amenity[];
+  location: string;
   cityName: string;
   discount: number;
   hotelName: string;
@@ -41,6 +46,30 @@ export type Hotel = {
   priceLowerBound: number;
   priceUpperBound: number;
   thumbnailUrl: string;
+  cityId: number;
+  gallery: Photo[];
+}
+
+export const initialHotel: Hotel = {
+  hotelId: 0,
+  amenities: [],
+  location: "Palestine",
+  cityName: "",
+  discount: 0,
+  hotelName: "",
+  latitude: 0.0,
+  longitude: 0.0,
+  roomPhotoUrl: "",
+  roomPrice: 0.0,
+  roomType: "",
+  starRating: 0,
+  description: "",
+  visitDate: "",
+  priceLowerBound: 0.0,
+  priceUpperBound: 0.0,
+  thumbnailUrl: "",
+  cityId: 1,
+  gallery: [],
 };
 
 export interface User {
