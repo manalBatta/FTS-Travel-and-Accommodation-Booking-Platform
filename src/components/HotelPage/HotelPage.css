@@ -11,14 +11,13 @@
     .hotel-location {
       margin-left: 15px;
       font-size: 1rem;
-      color: #979797;
+      color: var(--Note);
       font-weight: 400;
     }
   }
   .flex-cont {
-    background-color: black;
     width: 100%;
-    height: 60vh;
+    height: 100%;
     overflow: hidden;
     display: grid;
     .hotel-img {
@@ -41,33 +40,26 @@
       color: rgb(0, 0, 0);
     }
   }
-}
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0 4px;
-  justify-content: center;
-  border-radius: 12px;
-  height: 60vh;
-  overflow: scroll;
-  scrollbar-width: none;
-  margin: 1% 5% 0 1%;
-  .column {
-    flex: 33%;
-    max-width: 33%;
-    padding: 0 4px;
-    border-radius: 12px;
-  }
-  .column img {
-    margin-top: 8px;
-    vertical-align: middle;
+  .map-description-con {
+    height: 99vh;
     width: 100%;
-    border-radius: 12px;
-    cursor: "pointer";
-  }
-
-  .full-screen-modal img {
-    border: 2px solid white;
-    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    gap: 2%;
+    padding: 10% 3%;
+    box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px,
+      rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+    section {
+      flex: 1;
+      height: 100%;
+      h3 {
+        font-size: 2rem;
+      }
+      .note {
+        color: var(--Note);
+      }
+    }
   }
 }

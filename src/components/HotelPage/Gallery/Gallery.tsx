@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Photo } from "../../../Types";
 import { motion } from "motion/react";
+import "./Gallery.css";
 
 interface ColumnProps {
   photos: Photo[];

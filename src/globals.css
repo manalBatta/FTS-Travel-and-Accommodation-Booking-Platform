@@ -2,6 +2,8 @@
   --Text: black;
   --Primary: #7b61ff;
   --Secondary: #e0e0e0;
+  --Note: #979797;
+  --Box-Shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .w-100 {

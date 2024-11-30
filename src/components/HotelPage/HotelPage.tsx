@@ -5,6 +5,7 @@ import { Hotel, initialHotel } from "../../Types";
 import Navbar from "../HomePage/Navbar/Navbar";
 import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
+import { motion } from "motion/react";
 
 import "./HotelPage.css";
 import Gallery from "./Gallery/Gallery";
@@ -77,7 +78,26 @@ const HotelPage = () => {
       </h2>
 
       <Gallery gallery={hotelDetails.gallery} columns={3} />
-      <MapWithDynamicData></MapWithDynamicData>
+      <article className="map-description-con">
+        <MapWithDynamicData
+          latitude={hotelDetails.latitude}
+          longitude={hotelDetails.longitude}
+          hotelName={hotelDetails.hotelName}></MapWithDynamicData>
+
+        <section>
+          <motion.h3
+            initial={{ scale: 0.9 }}
+            whileInView={{ scale: 1, transition: { duration: 0.2 } }}>
+            Description
+          </motion.h3>
+          <motion.p
+            className="note"
+            initial={{ scale: 0.9 }}
+            whileInView={{ scale: 1, transition: { duration: 0.4 } }}>
+            {hotelDetails.description}
+          </motion.p>
+        </section>
+      </article>
     </div>
   );
 };

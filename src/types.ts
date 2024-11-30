@@ -121,3 +121,9 @@ export interface Destination {
   description: string;
   thumbnailUrl: string;
 }
+
+export interface mapArguments {
+  latitude: number;
+  longitude: number;
+  hotelName: string;
+}
