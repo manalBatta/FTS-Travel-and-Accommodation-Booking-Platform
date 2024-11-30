@@ -7,7 +7,6 @@ import ErrorPage from "./error-page";
 import LoginPage from "./components/LoginPage";
 import SearchResultsPage from "./components/SearchResultsPage";
 //import { AuthContext, AuthTokens } from "./components/context/auth";
-import { useState } from "react";
 import HotelPage from "./components/HotelPage";
 
 const router = createBrowserRouter([

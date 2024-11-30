@@ -51,10 +51,12 @@
   height: 60vh;
   overflow: scroll;
   scrollbar-width: none;
+  margin: 1% 5% 0 1%;
   .column {
-    flex: 25%;
-    max-width: 25%;
+    flex: 33%;
+    max-width: 33%;
     padding: 0 4px;
+    border-radius: 12px;
   }
   .column img {
     margin-top: 8px;

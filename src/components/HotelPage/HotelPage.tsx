@@ -8,6 +8,7 @@ import { IoMdStar } from "react-icons/io";
 
 import "./HotelPage.css";
 import Gallery from "./Gallery/Gallery";
+import MapWithDynamicData from "./Map/Map";
 
 const HotelPage = () => {
   const [hotelDetails, setHotelDetails] = useState<Hotel>(initialHotel);
@@ -76,6 +77,7 @@ const HotelPage = () => {
       </h2>
 
       <Gallery gallery={hotelDetails.gallery} columns={3} />
+      <MapWithDynamicData></MapWithDynamicData>
     </div>
   );
 };
