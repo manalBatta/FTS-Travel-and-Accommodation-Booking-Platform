@@ -1,0 +1,15 @@
+.btn {
+  grid-area: like;
+  border: none;
+  background-color: var(--Primary);
+  color: white;
+  font-size: 1.3rem;
+  text-align: center;
+  width: fit-content;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1% 4%;
+}

@@ -71,10 +71,10 @@ export const recentHotels = async (userId: number) => {
     throw new Error("Authorization token is missing");
   }
 
-  console.log(
-    "from request of recent hotels api",
-    `/home/users/${userId}/recent-hotels`
-  );
+  // console.log(
+  //   "from request of recent hotels api",
+  //   `/home/users/${userId}/recent-hotels`
+  // );
 
   return await fetch(baseURL + `/home/users/${userId}/recent-hotels`, {
     method: "GET",
@@ -95,4 +95,18 @@ export const hotel = async (hotelId: number) => {
 
 export const hotelGallery = async (hotelId: number) => {
   return await fetch(baseURL + `/hotels/${hotelId}/gallery`);
+};
+
+export const hotelRooms = async (hotelId: number) => {
+  return await fetch(
+    baseURL +
+      `/hotels/${hotelId}/rooms?checkInDate=1-2-2023&checkOutDate=1-3-2023`
+  );
+};
+
+export const hotelAvailableRooms = async (hotelId: number) => {
+  return await fetch(
+    baseURL +
+      `/hotels/${hotelId}/available-rooms?checkInDate=1-2-2023&checkOutDate=1-3-2023`
+  );
 };

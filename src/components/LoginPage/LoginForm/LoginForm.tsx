@@ -33,7 +33,7 @@ const LoginForm = () => {
             // setAuthTokens(value);
             localStorage.setItem("auth", result);
 
-            console.log("from Login form user=", result);
+            // console.log("from Login form user=", result);
 
             navigate("/", { replace: true });
           }

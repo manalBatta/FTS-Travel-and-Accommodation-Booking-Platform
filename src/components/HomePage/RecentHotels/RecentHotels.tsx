@@ -22,7 +22,7 @@ const RecentHotels = () => {
     getRecent(+user.user_id);
   }, []);
 
-  console.log("hello", recentHotelsList);
+  //console.log("hello", recentHotelsList);
   return (
     <ul className="Recent-container" id="Recently">
       <li>

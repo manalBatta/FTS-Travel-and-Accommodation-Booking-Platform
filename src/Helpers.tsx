@@ -6,6 +6,6 @@ export const getUser = () => {
   const result = authLocalStorage ? JSON.parse(authLocalStorage) : null;
   const token = result?.authentication;
   const decodedUser = jwtDecode<Auth>(token);
-  console.log(decodedUser);
+  //console.log(decodedUser);
   return decodedUser;
 };

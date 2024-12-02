@@ -3,13 +3,14 @@ import { useLocation } from "react-router-dom";
 import { hotel, hotelGallery, readFromReader } from "../../APIs";
 import { Hotel, initialHotel } from "../../Types";
 import Navbar from "../HomePage/Navbar/Navbar";
-import { IoLocationOutline, IoHeartOutline } from "react-icons/io5";
+import { IoLocationOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
 import { motion } from "motion/react";
-
 import "./HotelPage.css";
 import Gallery from "./Gallery/Gallery";
 import MapWithDynamicData from "./Map/Map";
+import Button from "../Button/Button";
+import Rooms from "./Rooms/Rooms";
 
 const HotelPage = () => {
   const [hotelDetails, setHotelDetails] = useState<Hotel>(initialHotel);
@@ -33,7 +34,7 @@ const HotelPage = () => {
             .split("},")
             .map((item) => JSON.parse(item.endsWith("}") ? item : item + "}"));
 
-          console.log("Parsed gallery items:", items);
+          // console.log("Parsed gallery items:", items);
 
           setHotelDetails({
             ...JSON.parse(result),
@@ -98,6 +99,7 @@ const HotelPage = () => {
           </motion.p>
         </section>
       </article>
+      <Rooms></Rooms>
     </div>
   );
 };

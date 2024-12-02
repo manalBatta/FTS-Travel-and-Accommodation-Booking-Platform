@@ -51,12 +51,12 @@ const SearchResultsPage = () => {
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
     setHotels(hotelsSearchResult);
-    console.log(
-      "search for ",
-      hotelSearch,
-      "get the result",
-      hotelsSearchResult
-    );
+    // console.log(
+    //   "search for ",
+    //   hotelSearch,
+    //   "get the result",
+    //   hotelsSearchResult
+    // );
   };
 
   useEffect(() => {
@@ -89,7 +89,7 @@ const SearchResultsPage = () => {
     }
     return 0;
   });
-  console.log("from search result", hotels);
+  // console.log("from search result", hotels);
   return (
     <>
       <div className="search-result-container">

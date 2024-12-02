@@ -50,6 +50,17 @@ export interface Hotel {
   gallery: Photo[];
 }
 
+export interface RoomType {
+  roomId: number;
+  roomNumber: number;
+  roomPhotoUrl: string;
+  roomType: string;
+  capacityOfAdults: number;
+  capacityOfChildren: number;
+  roomAmenities: Amenity[];
+  price: number;
+  availability: boolean;
+}
 export const initialHotel: Hotel = {
   hotelId: 0,
   amenities: [],

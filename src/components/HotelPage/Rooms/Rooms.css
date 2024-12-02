@@ -1,0 +1,24 @@
+.available-rooms-con {
+  height: 99vh;
+  width: 100%;
+
+  .header {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    h4 {
+      flex-grow: 2;
+      font-size: 2rem;
+    }
+
+    .btn {
+      cursor: pointer;
+    }
+  }
+
+  .rooms {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: stretch;
+  }
+}
