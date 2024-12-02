@@ -61,6 +61,13 @@ export interface RoomType {
   price: number;
   availability: boolean;
 }
+
+export interface Review {
+  reviewId: number;
+  customerName: string;
+  rating: number;
+  description: string;
+}
 export const initialHotel: Hotel = {
   hotelId: 0,
   amenities: [],
@@ -137,4 +144,5 @@ export interface mapArguments {
   latitude: number;
   longitude: number;
   hotelName: string;
+  description: string;
 }

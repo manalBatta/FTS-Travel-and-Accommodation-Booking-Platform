@@ -110,3 +110,7 @@ export const hotelAvailableRooms = async (hotelId: number) => {
       `/hotels/${hotelId}/available-rooms?checkInDate=1-2-2023&checkOutDate=1-3-2023`
   );
 };
+
+export const hotelReviews = async (hotelId: number) => {
+  return await fetch(baseURL + `/hotels/${hotelId}/reviews`);
+};

@@ -11,6 +11,7 @@ import Gallery from "./Gallery/Gallery";
 import MapWithDynamicData from "./Map/Map";
 import Button from "../Button/Button";
 import Rooms from "./Rooms/Rooms";
+import Reviews from "./Reviews/Reviews";
 
 const HotelPage = () => {
   const [hotelDetails, setHotelDetails] = useState<Hotel>(initialHotel);
@@ -79,27 +80,15 @@ const HotelPage = () => {
       </h2>
 
       <Gallery gallery={hotelDetails.gallery} columns={3} />
-      <article className="map-description-con">
-        <MapWithDynamicData
-          latitude={hotelDetails.latitude}
-          longitude={hotelDetails.longitude}
-          hotelName={hotelDetails.hotelName}></MapWithDynamicData>
+      <MapWithDynamicData
+        latitude={hotelDetails.latitude}
+        longitude={hotelDetails.longitude}
+        hotelName={hotelDetails.hotelName}
+        description={hotelDetails.description}></MapWithDynamicData>
 
-        <section>
-          <motion.h3
-            initial={{ scale: 0.9 }}
-            whileInView={{ scale: 1, transition: { duration: 0.2 } }}>
-            Description
-          </motion.h3>
-          <motion.p
-            className="note"
-            initial={{ scale: 0.9 }}
-            whileInView={{ scale: 1, transition: { duration: 0.4 } }}>
-            {hotelDetails.description}
-          </motion.p>
-        </section>
-      </article>
       <Rooms></Rooms>
+
+      <Reviews></Reviews>
     </div>
   );
 };

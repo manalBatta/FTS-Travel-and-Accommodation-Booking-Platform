@@ -40,26 +40,4 @@
       color: rgb(0, 0, 0);
     }
   }
-  .map-description-con {
-    height: 99vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    gap: 2%;
-    padding: 10% 3%;
-    box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px,
-      rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
-    section {
-      flex: 1;
-      height: 100%;
-      h3 {
-        font-size: 2rem;
-      }
-      .note {
-        color: var(--Note);
-      }
-    }
-  }
 }

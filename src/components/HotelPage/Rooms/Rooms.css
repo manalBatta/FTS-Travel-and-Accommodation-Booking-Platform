@@ -1,6 +1,7 @@
 .available-rooms-con {
   height: 99vh;
   width: 100%;
+  min-height: fit-content;
 
   .header {
     display: flex;

@@ -52,40 +52,58 @@ const MapWithDynamicData = (props: mapArguments) => {
     popupAnchor: [0, -32],
   });
   return (
-    <motion.div
-      className="map"
-      initial={{ scale: 0.8 }}
-      whileInView={{ scale: 1, transition: { duration: 0.4 } }}>
-      {props.latitude && props.longitude ? (
-        <MapContainer
-          center={[props.latitude, props.longitude]}
-          zoom={13}
-          className="map-con">
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={[props.latitude, props.longitude]} icon={hotelIcon}>
-            <Popup>{props.hotelName}</Popup>
-          </Marker>
-          {/* Render nearby attractions markers */}
-          {attractions.map((attraction) => (
+    <article className="map-description-con">
+      <motion.div
+        className="map"
+        initial={{ scale: 0.8 }}
+        whileInView={{ scale: 1, transition: { duration: 0.4 } }}>
+        {props.latitude && props.longitude ? (
+          <MapContainer
+            center={[props.latitude, props.longitude]}
+            zoom={13}
+            className="map-con">
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
             <Marker
-              icon={attractionIcon}
-              key={attraction.id}
-              position={[attraction.lat, attraction.lon]}>
-              <Popup>{attraction.name}</Popup>
+              position={[props.latitude, props.longitude]}
+              icon={hotelIcon}>
+              <Popup>{props.hotelName}</Popup>
             </Marker>
-          ))}
-        </MapContainer>
-      ) : (
-        <img
-          src="/homeCover.jpg"
-          alt="loading map"
-          style={{ height: "100%", margin: "0 auto" }}
-        />
-      )}
-    </motion.div>
+            {/* Render nearby attractions markers */}
+            {attractions.map((attraction) => (
+              <Marker
+                icon={attractionIcon}
+                key={attraction.id}
+                position={[attraction.lat, attraction.lon]}>
+                <Popup>{attraction.name}</Popup>
+              </Marker>
+            ))}
+          </MapContainer>
+        ) : (
+          <img
+            src="/homeCover.jpg"
+            alt="loading map"
+            style={{ height: "100%", margin: "0 auto" }}
+          />
+        )}
+      </motion.div>
+
+      <section>
+        <motion.h3
+          initial={{ scale: 0.9 }}
+          whileInView={{ scale: 1, transition: { duration: 0.2 } }}>
+          Description
+        </motion.h3>
+        <motion.p
+          className="note"
+          initial={{ scale: 0.9 }}
+          whileInView={{ scale: 1, transition: { duration: 0.4 } }}>
+          {props.description}
+        </motion.p>
+      </section>
+    </article>
   );
 };
 

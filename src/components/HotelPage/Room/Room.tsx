@@ -20,7 +20,7 @@ const Room: React.FC<RoomType> = (room) => {
           <h1 className="font">Amenities</h1>
           <ul>
             {room?.roomAmenities.map((amenity) => (
-              <li>{amenity.name}</li>
+              <li key={amenity.name}>{amenity.name}</li>
             ))}
           </ul>
         </div>
