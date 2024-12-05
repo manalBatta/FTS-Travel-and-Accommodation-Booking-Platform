@@ -46,7 +46,7 @@ const Reviews = () => {
 
   let review: Review = reviewsList[index];
   return (
-    <article className="reviews-con">
+    <article className="reviews-con" id="RatingReviews">
       <motion.h4
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}>

@@ -1,4 +1,4 @@
-import { createContext, PropsWithChildren, ReactElement } from "react";
+import { createContext, PropsWithChildren } from "react";
 import { useState, useEffect } from "react";
 import { CartContextValue, CartItem } from "../../Types";
 
@@ -8,21 +8,21 @@ export const CartProvider = (props: PropsWithChildren) => {
   const [cartItems, setCartItems] = useState<CartItem[]>(
     JSON.parse(localStorage.getItem("cartItems") || "[]")
   );
-  const addToCart = (item: CartItem) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === item.id); // check if the item is already in the cart
+  const addToCart = (id: number, hotelName: string) => {
+    const isItemInCart = cartItems.find((item) => item.id === id); // check if the item is already in the cart
 
     if (isItemInCart) {
       throw new Error("Item already in the cart!");
     } else {
-      setCartItems([...cartItems, item]);
+      setCartItems([...cartItems, { id: id, hotelName: hotelName }]);
     }
   };
 
   const removeFromCart = (id: number) => {
-    const isItemInCart = cartItems.find((cartItem) => cartItem.id === id);
+    const isItemInCart = cartItems.find((item) => item.id === id);
 
     if (isItemInCart) {
-      setCartItems(cartItems.filter((cartItem) => cartItem.id !== id));
+      setCartItems(cartItems.filter((item) => item.id !== id));
     }
   };
 
@@ -30,9 +30,9 @@ export const CartProvider = (props: PropsWithChildren) => {
     setCartItems([]);
   };
 
-  const getCartTotal = () => {
-    return cartItems.reduce((total, item) => total + item.price, 0); // calculate the total price of the items in the cart
-  };
+  // const getCartTotal = () => {
+  //   return cartItems.reduce((total, item) => total + item.price, 0); // calculate the total price of the items in the cart
+  // };
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -52,7 +52,6 @@ export const CartProvider = (props: PropsWithChildren) => {
         addToCart,
         removeFromCart,
         clearCart,
-        getCartTotal,
       }}>
       {props.children}
     </CartContext.Provider>

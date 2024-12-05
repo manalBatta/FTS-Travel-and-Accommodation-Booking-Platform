@@ -52,7 +52,7 @@ const MapWithDynamicData = (props: mapArguments) => {
     popupAnchor: [0, -32],
   });
   return (
-    <article className="map-description-con">
+    <article className="map-description-con" id="Description">
       <motion.div
         className="map"
         initial={{ scale: 0.8 }}

@@ -8,7 +8,7 @@ const Cart = () => {
   const { cartItems } = useContext(CartContext);
 
   return (
-    <Link to={"homePage"} className="fixed-con">
+    <Link to={"/checkoutPage"} className="fixed-con">
       <h1>{cartItems.length}</h1>
       <IoBagCheck />
     </Link>

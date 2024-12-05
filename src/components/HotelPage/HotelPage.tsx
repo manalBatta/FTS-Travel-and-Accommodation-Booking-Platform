@@ -56,7 +56,13 @@ const HotelPage = () => {
 
   return (
     <div className="hotel-container">
-      <Navbar></Navbar>
+      <Navbar
+        navItems={[
+          { name: "Gallery", link: "#" },
+          { name: "Description", link: "#Description" },
+          { name: "Available Rooms", link: "#AvailableRooms" },
+          { name: "Rating & Reviews", link: "#RatingReviews" },
+        ]}></Navbar>
       <h1 className="hotel-name">
         {hotelDetails?.hotelName}
         <span className="hotel-location">
@@ -84,7 +90,7 @@ const HotelPage = () => {
         hotelName={hotelDetails.hotelName}
         description={hotelDetails.description}></MapWithDynamicData>
 
-      <Rooms></Rooms>
+      <Rooms hotelName={hotelDetails.hotelName}></Rooms>
 
       <Reviews></Reviews>
     </div>

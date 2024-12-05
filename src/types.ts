@@ -149,23 +149,45 @@ export interface mapArguments {
 
 export interface CartItem {
   id: number;
-  price: number;
+  hotelName: string;
 }
-
 export interface CartContextValue {
-  addToCart: (item: CartItem) => void;
+  addToCart: (id: number, hotelName: string) => void;
   removeFromCart: (id: number) => void;
   clearCart: () => void;
-  getCartTotal: () => number;
   cartItems: CartItem[];
 }
 
 export type RoomProps = {
   room: RoomType;
-  addToCart: (item: CartItem) => void;
+  addToCart: (id: number, hotelName: string) => void;
+  hotelName: string;
 };
 
 export type buttonProps = {
   handleClick?: React.MouseEventHandler;
   disabled?: boolean;
+};
+
+export interface NavItem {
+  name: string;
+  link: string;
+}
+
+export interface NavbarProps {
+  user?: {
+    name: string;
+    iconSrc: string;
+  };
+  navItems: NavItem[];
+}
+
+export type BookingDetails = {
+  customerName: string;
+  hotelName: string;
+  roomNumber: string;
+  roomType: string;
+  bookingDateTime: string;
+  totalCost: number;
+  paymentMethod: string;
 };

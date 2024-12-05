@@ -13,13 +13,16 @@ import Button from "../../Button/Button";
 import { CartContext } from "../../context/cart";
 import Cart from "../Cart/Cart";
 
-const Rooms = () => {
+type RoomsProps = {
+  hotelName: string;
+};
+const Rooms = ({ hotelName }: RoomsProps) => {
   const [roomsList, setRoomsList] = useState<RoomType[]>([]);
   const { cartItems, addToCart } = useContext(CartContext);
   const [filterRooms, setFilterRooms] = useState<SearchDetails>({
     ...SearchDetailsInitialValue,
-    children: 10,
-    adults: 10,
+    children: 5,
+    adults: 5,
   });
   const location = useLocation();
   let hotelId;
@@ -50,7 +53,7 @@ const Rooms = () => {
   //console.log(filterRooms);
   //console.log(addToCart);
   return (
-    <article className="available-rooms-con">
+    <article className="available-rooms-con" id="AvailableRooms">
       <Cart></Cart>
       <motion.h4
         initial={{ opacity: 0, scale: 0 }}
@@ -63,6 +66,8 @@ const Rooms = () => {
           <input
             className="guests"
             type="number"
+            min={1}
+            max={5}
             placeholder="Adults"
             value={filterRooms.adults}
             onChange={(event) =>
@@ -76,6 +81,8 @@ const Rooms = () => {
           <h2>Children</h2>
           <input
             type="number"
+            min={1}
+            max={5}
             className="guests"
             placeholder="children"
             value={filterRooms.children}
@@ -133,7 +140,11 @@ const Rooms = () => {
             )
               return "";
             return (
-              <Room key={room.roomId} room={room} addToCart={addToCart}></Room>
+              <Room
+                key={room.roomId}
+                room={room}
+                addToCart={addToCart}
+                hotelName={hotelName}></Room>
             );
           })}
       </section>

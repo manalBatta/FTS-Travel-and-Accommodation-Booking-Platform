@@ -10,7 +10,13 @@ const HomePage = () => {
   return (
     <div className="home-page">
       <header className="header-container">
-        <Navbar></Navbar>
+        <Navbar
+          navItems={[
+            { name: "Search", link: "#" },
+            { name: "Featured Deals", link: "#Featured" },
+            { name: "Trending Destination", link: "#Trending" },
+            { name: "Recently Visited", link: "#Recently" },
+          ]}></Navbar>{" "}
         <div className="search-container">
           <h1>Discover the most engaging places</h1>
           <SearchBar></SearchBar>

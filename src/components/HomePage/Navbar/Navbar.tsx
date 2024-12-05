@@ -1,25 +1,24 @@
+import React from "react";
 import "./Navbar.css";
-const Navbar = () => {
+import { NavbarProps } from "../../../Types";
+
+const Navbar: React.FC<NavbarProps> = ({
+  navItems,
+  user = { name: "nick", iconSrc: "/userIcon.png" },
+}) => {
   return (
     <nav>
       <img src="/logo.png" alt="2risem website Logo" className="logo" />
       <ul>
-        <li>
-          <a href="#">Search</a>
-        </li>
-        <li>
-          <a href="#Featured">Featured Deals</a>
-        </li>{" "}
-        <li>
-          <a href="#Trending"> Trending Destination</a>
-        </li>
-        <li>
-          <a href="#Recently">Recently Visited</a>
-        </li>
+        {navItems.map((item, index) => (
+          <li key={index}>
+            <a href={item.link}>{item.name}</a>
+          </li>
+        ))}
       </ul>
       <div className="user-icon">
-        <h2>Eva jonson</h2>
-        <img src="/userIcon.png" alt="Female user icon" />
+        <h2>{user.name}</h2>
+        <img src={user.iconSrc} alt="User icon" />
       </div>
     </nav>
   );
