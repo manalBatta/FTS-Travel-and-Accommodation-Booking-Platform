@@ -146,3 +146,26 @@ export interface mapArguments {
   hotelName: string;
   description: string;
 }
+
+export interface CartItem {
+  id: number;
+  price: number;
+}
+
+export interface CartContextValue {
+  addToCart: (item: CartItem) => void;
+  removeFromCart: (id: number) => void;
+  clearCart: () => void;
+  getCartTotal: () => number;
+  cartItems: CartItem[];
+}
+
+export type RoomProps = {
+  room: RoomType;
+  addToCart: (item: CartItem) => void;
+};
+
+export type buttonProps = {
+  handleClick?: React.MouseEventHandler;
+  disabled?: boolean;
+};

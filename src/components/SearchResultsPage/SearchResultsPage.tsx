@@ -13,6 +13,7 @@ import { SearchHotel, Hotel, Amenity } from "../../Types";
 import { useLocation } from "react-router-dom";
 import { MdOutlineManageSearch } from "react-icons/md";
 import HotelCard from "../HotelCard/HotelCard";
+import Cart from "../HotelPage/Cart/Cart";
 
 const SearchResultsPage = () => {
   const location = useLocation();
@@ -93,6 +94,7 @@ const SearchResultsPage = () => {
   return (
     <>
       <div className="search-result-container">
+        <Cart></Cart>
         <article className="search-bar-con">
           <SearchBar></SearchBar>
           <img src="/logo.png" alt="2risem website Logo" className="logo" />

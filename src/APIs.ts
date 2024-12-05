@@ -97,10 +97,14 @@ export const hotelGallery = async (hotelId: number) => {
   return await fetch(baseURL + `/hotels/${hotelId}/gallery`);
 };
 
-export const hotelRooms = async (hotelId: number) => {
+export const hotelRooms = async (
+  hotelId: number,
+  checkInDate: string,
+  checkOutDate: string
+) => {
   return await fetch(
     baseURL +
-      `/hotels/${hotelId}/rooms?checkInDate=1-2-2023&checkOutDate=1-3-2023`
+      `/hotels/${hotelId}/rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}`
   );
 };
 

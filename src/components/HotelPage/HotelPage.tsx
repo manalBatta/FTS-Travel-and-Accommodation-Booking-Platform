@@ -5,11 +5,9 @@ import { Hotel, initialHotel } from "../../Types";
 import Navbar from "../HomePage/Navbar/Navbar";
 import { IoLocationOutline } from "react-icons/io5";
 import { IoMdStar } from "react-icons/io";
-import { motion } from "motion/react";
 import "./HotelPage.css";
 import Gallery from "./Gallery/Gallery";
 import MapWithDynamicData from "./Map/Map";
-import Button from "../Button/Button";
 import Rooms from "./Rooms/Rooms";
 import Reviews from "./Reviews/Reviews";
 

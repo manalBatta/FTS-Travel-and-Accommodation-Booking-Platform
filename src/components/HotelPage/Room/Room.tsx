@@ -1,9 +1,9 @@
-import { RoomType } from "../../../Types";
+import { CartItem, RoomProps, RoomType } from "../../../Types";
 import Button from "../../Button/Button";
 import "./Room.css";
 import { motion } from "motion/react";
 
-const Room: React.FC<RoomType> = (room) => {
+const Room: React.FC<RoomProps> = ({ room, addToCart }: RoomProps) => {
   return (
     <motion.div
       className="room"
@@ -33,7 +33,17 @@ const Room: React.FC<RoomType> = (room) => {
         </div>
         <div className="price">
           <h3>{room?.price}$/night </h3>
-          <Button> {room?.availability ? "Book now" : "Not Available"}</Button>
+          <Button
+            disabled={room.availability}
+            handleClick={() => {
+              try {
+                addToCart({ id: room.roomId, price: room.price });
+              } catch (error) {
+                alert("You reserved room earlier");
+              }
+            }}>
+            {room.availability ? "Book now" : "not avialable"}
+          </Button>
         </div>
       </section>
     </motion.div>
