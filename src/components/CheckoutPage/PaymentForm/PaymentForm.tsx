@@ -2,10 +2,8 @@ import React, { useState, useContext } from "react";
 import "./PaymentForm.css";
 import { CartContext } from "../../context/cart";
 import Button from "../../Button/Button";
+import { PaymentFormProps } from "../../../Types";
 
-type PaymentFormProps = {
-  pay: () => void;
-};
 const PaymentForm = ({ pay }: PaymentFormProps) => {
   const [paymentMethod, setPaymentMethod] = useState("Card");
   const { clearCart } = useContext(CartContext);
@@ -13,6 +11,7 @@ const PaymentForm = ({ pay }: PaymentFormProps) => {
   const confirmPayment = () => {
     pay();
     clearCart();
+    console.log("payed");
   };
 
   return (
@@ -68,6 +67,10 @@ const PaymentForm = ({ pay }: PaymentFormProps) => {
               <input type="text" placeholder="123" />
             </div>
           </div>
+          <div className="input-group">
+            <label>Special Requests or Remarks</label>
+            <input type="text" placeholder="anything you wish.." />
+          </div>
           <label className="checkbox-group">
             <input type="checkbox" />
             Save card details
@@ -76,9 +79,9 @@ const PaymentForm = ({ pay }: PaymentFormProps) => {
       )}
       <div className="buttons">
         <Button>
-          <button className="confirm-button " onClick={confirmPayment}>
+          <div className="confirm-button btn" onClick={confirmPayment}>
             Confirm Payment
-          </button>
+          </div>
         </Button>
       </div>
       <p className="privacy-note">

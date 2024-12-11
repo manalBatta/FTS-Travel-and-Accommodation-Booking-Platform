@@ -6,11 +6,12 @@ import { bookRoom, readFromReader, roomDetails } from "../../APIs";
 import { getUser } from "../../Helpers";
 import Room from "../HotelPage/Room/Room";
 import PaymentForm from "./PaymentForm/PaymentForm";
+import { useNavigate } from "react-router-dom";
 
 const CheckoutPage = () => {
   const { cartItems } = useContext(CartContext);
   const [roomsINCart, setRoomsINCart] = useState<RoomType[]>([]);
-
+  const navigation = useNavigate();
   const getRoomsDetails = async () => {
     try {
       const RoomsDetails = await Promise.all(
@@ -34,6 +35,7 @@ const CheckoutPage = () => {
 
   const executePayment = async () => {
     const user = getUser();
+    const paymentConfirmation = [];
     for (let i = 0; i < cartItems.length; i++) {
       const requestBody: BookingDetails = {
         customerName: user?.given_name,
@@ -44,15 +46,21 @@ const CheckoutPage = () => {
         totalCost: roomsINCart[i]?.price,
         paymentMethod: "card",
       };
-      console.log("requst body", requestBody);
-      const response = await bookRoom(requestBody);
-      const result = await readFromReader(response);
-      console.log("result of payment", result); //the response is unauthorized for all the requests How to be authorized
+      //console.log("requst body", requestBody);
+      try {
+        const response = await bookRoom(requestBody);
+        const result = await readFromReader(response);
+        if (result) paymentConfirmation.push(JSON.parse(result));
+        console.log("result of payment", result); //I should take the result of each excute payment op and display it in the conirmation page
+      } catch (error) {
+        console.log(error);
+        alert("fail reservation try again later");
+      }
     }
+    navigation("/confirmation", { state: paymentConfirmation });
   };
   useEffect(() => {
     getRoomsDetails();
-    executePayment();
   }, []);
   return (
     <>

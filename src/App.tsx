@@ -9,6 +9,7 @@ import SearchResultsPage from "./components/SearchResultsPage";
 //import { AuthContext, AuthTokens } from "./components/context/auth";
 import HotelPage from "./components/HotelPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
+import ConfirmationPage from "./components/CheckoutPage/ConfirmationPage/ConfirmationPage";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ const router = createBrowserRouter([
   {
     path: "/checkoutPage",
     element: <CheckoutPage></CheckoutPage>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/confirmation",
+    element: <ConfirmationPage></ConfirmationPage>,
     errorElement: <ErrorPage></ErrorPage>,
   },
 ]);

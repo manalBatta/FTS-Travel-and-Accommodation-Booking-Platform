@@ -192,3 +192,19 @@ export type BookingDetails = {
   totalCost: number;
   paymentMethod: string;
 };
+
+export type PaymentFormProps = {
+  pay: () => void;
+};
+
+export type Reservation = {
+  customerName: string;
+  hotelName: string;
+  roomNumber: string;
+  roomType: string;
+  bookingDateTime: string;
+  totalCost: number;
+  paymentMethod: string;
+  bookingStatus: string;
+  confirmationNumber: string;
+};
