@@ -1,4 +1,6 @@
+import { getUser } from "./Helpers";
 import * as types from "./Types";
+import { Auth } from "./Types";
 const baseURL =
   "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
 
@@ -117,4 +119,22 @@ export const hotelAvailableRooms = async (hotelId: number) => {
 
 export const hotelReviews = async (hotelId: number) => {
   return await fetch(baseURL + `/hotels/${hotelId}/reviews`);
+};
+
+export const roomDetails = async (roomId: number) => {
+  return await fetch(baseURL + `/rooms/${roomId}`);
+};
+
+export const bookRoom = async (body: types.BookingDetails) => {
+  const authLocalStorage = localStorage.getItem("auth");
+  const result = authLocalStorage ? JSON.parse(authLocalStorage) : null;
+  const token = result?.authentication;
+  return await fetch(baseURL + "/bookings/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json; utf-8",
+     "Authorization": `Bearer ${token}`, // The token is unvalid due to
+    },
+    body: JSON.stringify(body),
+  });
 };

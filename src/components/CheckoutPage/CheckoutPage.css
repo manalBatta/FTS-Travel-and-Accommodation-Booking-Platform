@@ -1,0 +1,44 @@
+.checkout-con {
+  header {
+    padding: 1%;
+    img {
+      width: 6%;
+      float: right;
+    }
+  }
+  main {
+    display: flex;
+    margin: 1% 0;
+    padding: 2%;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 88vh;
+    min-height: fit-content;
+    .booking-summery {
+      flex: 1;
+      box-sizing: border-box;
+      width: 50%;
+      height: 80vh;
+      padding: 1%;
+      box-shadow: var(--Box-Shadow);
+      .rooms-to-book {
+        overflow-y: scroll;
+        height: 82%;
+        .room {
+          margin: 5px auto;
+        }
+      }
+      h2 {
+        margin: 1%;
+        margin-bottom: 2%;
+      }
+    }
+
+    .payment-details {
+      flex: 1;
+      width: 50%;
+      height: 80vh;
+    }
+  }
+}

@@ -160,8 +160,9 @@ export interface CartContextValue {
 
 export type RoomProps = {
   room: RoomType;
-  addToCart: (id: number, hotelName: string) => void;
-  hotelName: string;
+  addToCart?: (id: number, hotelName: string) => void;
+  hotelName?: string;
+  details: boolean;
 };
 
 export type buttonProps = {

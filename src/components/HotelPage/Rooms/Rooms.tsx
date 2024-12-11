@@ -11,14 +11,13 @@ import Room from "../Room/Room";
 import { motion } from "motion/react";
 import Button from "../../Button/Button";
 import { CartContext } from "../../context/cart";
-import Cart from "../Cart/Cart";
+import Cart from "../../Cart/Cart";
 
 type RoomsProps = {
   hotelName: string;
 };
 const Rooms = ({ hotelName }: RoomsProps) => {
   const [roomsList, setRoomsList] = useState<RoomType[]>([]);
-  const { cartItems, addToCart } = useContext(CartContext);
   const [filterRooms, setFilterRooms] = useState<SearchDetails>({
     ...SearchDetailsInitialValue,
     children: 5,
@@ -143,8 +142,8 @@ const Rooms = ({ hotelName }: RoomsProps) => {
               <Room
                 key={room.roomId}
                 room={room}
-                addToCart={addToCart}
-                hotelName={hotelName}></Room>
+                hotelName={hotelName}
+                details={false}></Room>
             );
           })}
       </section>

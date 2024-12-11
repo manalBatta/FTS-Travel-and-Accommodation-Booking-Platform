@@ -13,7 +13,7 @@ import { SearchHotel, Hotel, Amenity } from "../../Types";
 import { useLocation } from "react-router-dom";
 import { MdOutlineManageSearch } from "react-icons/md";
 import HotelCard from "../HotelCard/HotelCard";
-import Cart from "../HotelPage/Cart/Cart";
+import Cart from "../Cart/Cart";
 
 const SearchResultsPage = () => {
   const location = useLocation();

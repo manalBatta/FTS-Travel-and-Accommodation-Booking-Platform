@@ -2,12 +2,13 @@ import { RoomProps, RoomType } from "../../../Types";
 import Button from "../../Button/Button";
 import "./Room.css";
 import { motion } from "motion/react";
+import { MdOutlineCancel } from "react-icons/md";
+import { useContext } from "react";
+import { CartContext } from "../../context/cart";
 
-const Room: React.FC<RoomProps> = ({
-  room,
-  addToCart,
-  hotelName,
-}: RoomProps) => {
+const Room: React.FC<RoomProps> = ({ room, hotelName, details }: RoomProps) => {
+  const { addToCart, removeFromCart } = useContext(CartContext);
+
   return (
     <motion.div
       className="room"
@@ -16,7 +17,9 @@ const Room: React.FC<RoomProps> = ({
       <section className="section-1">
         <div
           className="room-img"
-          style={{ backgroundImage: `url(${room?.roomPhotoUrl})` }}></div>
+          style={{ backgroundImage: `url(${room?.roomPhotoUrl})` }}>
+          {details && <h1 className="hotel-name">{hotelName}</h1>}
+        </div>
       </section>
       <section className="section-2">{room?.roomType} room</section>
       <section className="section-3">
@@ -40,13 +43,26 @@ const Room: React.FC<RoomProps> = ({
           <Button
             disabled={room.availability}
             handleClick={() => {
-              try {
-                addToCart(room.roomId, hotelName);
-              } catch (error) {
-                alert("You reserved room earlier");
-              }
+              if (details) {
+                removeFromCart(room.roomId);
+                window.location.reload();
+              } else
+                try {
+                  if (addToCart && hotelName) addToCart(room.roomId, hotelName);
+                } catch (error) {
+                  alert("You reserved room earlier");
+                }
             }}>
-            {room.availability ? "Book now" : "not avialable"}
+            {details ? (
+              <>
+                <MdOutlineCancel size={20} />
+                cancel
+              </>
+            ) : room.availability ? (
+              "Book now"
+            ) : (
+              "not avialable"
+            )}
           </Button>
         </div>
       </section>
