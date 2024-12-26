@@ -10,6 +10,7 @@ import SearchResultsPage from "./components/SearchResultsPage";
 import HotelPage from "./components/HotelPage";
 import CheckoutPage from "./components/CheckoutPage/CheckoutPage";
 import ConfirmationPage from "./components/CheckoutPage/ConfirmationPage/ConfirmationPage";
+import AdminPageForEasyManagement from "./components/AdminPageForEasyManagement";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,11 @@ const router = createBrowserRouter([
   {
     path: "/confirmation",
     element: <ConfirmationPage></ConfirmationPage>,
+    errorElement: <ErrorPage></ErrorPage>,
+  },
+  {
+    path: "/adminManagement",
+    element: <AdminPageForEasyManagement></AdminPageForEasyManagement>,
     errorElement: <ErrorPage></ErrorPage>,
   },
 ]);

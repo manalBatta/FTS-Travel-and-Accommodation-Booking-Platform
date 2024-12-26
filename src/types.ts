@@ -208,3 +208,19 @@ export type Reservation = {
   bookingStatus: string;
   confirmationNumber: string;
 };
+
+//Admin types
+export type CitiesRequest = {
+  name: string;
+  searchQuery: string;
+  pageSize: number;
+  pageNumber: number;
+};
+
+export interface City {
+  id: number;
+  name: string;
+  description: string;
+  lastUpdate: string;
+  hotels: Hotel[];
+}

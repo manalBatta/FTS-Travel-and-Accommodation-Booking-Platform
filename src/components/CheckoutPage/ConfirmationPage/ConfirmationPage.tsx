@@ -2,6 +2,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./ConfirmationPage.css";
 import { Reservation } from "../../../Types";
 
+/////you just have to decorate the confirmation page well done
+
 const ConfirmationPage = () => {
   const location = useLocation();
   const reservations: Reservation[] = location.state;

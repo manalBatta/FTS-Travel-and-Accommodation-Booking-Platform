@@ -1,1 +1,1 @@
-export { default } from "./AdminPageForEasyManagement";
+export { default } from "./AdminPage";
