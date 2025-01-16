@@ -8,7 +8,7 @@ const CityTableRow: React.FC<{
 }> = ({ city, onEdit }) => {
   const remove = async (e: React.SyntheticEvent) => {
     e.stopPropagation();
-    const confirmed = window.confirm("Assert deleting" + city?.name + " city");
+    const confirmed = window.confirm("Assert deleting " + city?.name + " city");
     if (confirmed) {
       const response = await deleteCity(city?.id);
       const result = await readFromReader(response);
@@ -26,7 +26,7 @@ const CityTableRow: React.FC<{
           <span className="city-desc">{city?.description}</span>
           <span>{city?.hotels?.length || 0}</span>
           <span className="center-text">
-            <FcDeleteRow size={25} onClick={remove} />
+            <FcDeleteRow size={25} onClick={remove} role="button" />
           </span>
         </div>
       )}
