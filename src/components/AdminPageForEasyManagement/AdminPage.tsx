@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 
 import "./AdminPage.css";
-import Sidebar from "./Sidebar";
+import Sidebar from "./Sidebar/Sidebar";
 import SearchBar from "./SearchBar";
 import TableHeader from "./TableHeader";
-import CityTableRow from "./CityTableRow";
+import CityTableRow from "./CityTableRow/CityTableRow";
 import Pagination from "./Pagination";
 import {
   getCities,
@@ -14,8 +14,8 @@ import {
   updateCity,
 } from "../../APIs";
 import { City, Hotel } from "../../Types";
-import PopupForm from "./PopupForm";
-import HotelTableRow from "./HotelTableRow";
+import PopupForm from "./PopupForm/PopupForm";
+import HotelTableRow from "./HotelTableRow/HotelTableRow";
 
 const AdminPage: React.FC = () => {
   const [cityTableData, setCityTableData] = useState<City[]>([]);

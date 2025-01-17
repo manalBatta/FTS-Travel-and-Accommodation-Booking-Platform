@@ -1,5 +1,5 @@
 import React from "react";
-import {  Hotel } from "../../Types";
+import {  Hotel } from "../../../Types";
 import { FcDeleteRow } from "react-icons/fc";
 
 const HotelTableRow: React.FC<{

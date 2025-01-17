@@ -2,11 +2,10 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CityTableRow from "./CityTableRow";
-import { deleteCity } from "../../APIs";
-import { City } from "../../Types";
+import { City } from "../../../Types";
+import { deleteCity } from "../../../APIs";
 
-// Mocking the APIs
-jest.mock("../../APIs", () => ({
+jest.mock("../../../APIs", () => ({
   deleteCity: jest.fn(),
   readFromReader: jest.fn(),
 }));

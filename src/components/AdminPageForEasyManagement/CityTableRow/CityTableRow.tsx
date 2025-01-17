@@ -1,7 +1,7 @@
 import React from "react";
-import { City, Hotel } from "../../Types";
+import { City, Hotel } from "../../../Types";
 import { FcDeleteRow } from "react-icons/fc";
-import { deleteCity, readFromReader, updateCity } from "../../APIs";
+import { deleteCity, readFromReader, updateCity } from "../../../APIs";
 const CityTableRow: React.FC<{
   city: City;
   onEdit: (city: City) => void;

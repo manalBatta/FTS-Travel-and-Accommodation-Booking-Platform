@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./PopupForm.css"; // Add CSS for centering and styling
-import Button from "../Button/Button";
+import Button from "../../Button/Button";
 // Assuming you have a reusable Button component
 
 interface PopupFormProps {
