@@ -8,9 +8,13 @@ const RecentHotels = () => {
   const [recentHotelsList, setRecentHotelsList] = useState<Hotel[]>([]);
 
   const getRecent = async (authentication: number) => {
-    const response = await recentHotels(authentication);
-    const result = await readFromReader(response);
-    if (result) setRecentHotelsList(JSON.parse(result));
+    try {
+      const response = await recentHotels(authentication);
+      const result = await readFromReader(response);
+      if (result) setRecentHotelsList(JSON.parse(result));
+    } catch (error) {
+      console.error("Failed to load recent hotels:", error);
+    }
   };
 
   useEffect(() => {

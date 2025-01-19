@@ -3,11 +3,22 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import { CartContext } from "../context/cart";
 import Cart from "./Cart";
+import { CartItem } from "../../Types";
 
 describe("Cart Component", () => {
-  const renderWithContext = (cartItems) => {
+  const mockClearCart = jest.fn();
+  const addToCart = jest.fn();
+  const removeFromCart = jest.fn();
+
+  const renderWithContext = (cartItems: CartItem[]) => {
     render(
-      <CartContext.Provider value={{ cartItems }}>
+      <CartContext.Provider
+        value={{
+          cartItems,
+          addToCart,
+          removeFromCart,
+          clearCart: mockClearCart,
+        }}>
         <BrowserRouter>
           <Cart />
         </BrowserRouter>
@@ -25,7 +36,10 @@ describe("Cart Component", () => {
   });
 
   it("renders correctly with items in the cart", () => {
-    renderWithContext([{ id: 1, name: "Item 1" }, { id: 2, name: "Item 2" }]);
+    renderWithContext([
+      { id: 1, hotelName: "Item 1" },
+      { id: 2, hotelName: "Item 2" },
+    ]);
     const cartCount = screen.getByText("2");
     const link = screen.getByRole("link");
     expect(cartCount).toBeInTheDocument();
