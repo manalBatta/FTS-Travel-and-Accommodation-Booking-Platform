@@ -184,7 +184,7 @@ export interface NavbarProps {
 }
 
 export type BookingDetails = {
-  customerName: string;
+  customerName: string | "";
   hotelName: string;
   roomNumber: string;
   roomType: string;

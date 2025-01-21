@@ -22,7 +22,6 @@ const CheckoutPage = () => {
         })
       );
 
-      // Set the resolved data to state
       setRoomsINCart(RoomsDetails);
     } catch (error) {
       console.error("Error fetching room details:", error);
@@ -38,7 +37,7 @@ const CheckoutPage = () => {
     const paymentConfirmation = [];
     for (let i = 0; i < cartItems.length; i++) {
       const requestBody: BookingDetails = {
-        customerName: user?.given_name,
+        customerName: user?.given_name||"",
         hotelName: cartItems[i]?.hotelName,
         roomNumber: roomsINCart[i]?.roomNumber.toString(),
         roomType: roomsINCart[i]?.roomType,
@@ -46,7 +45,6 @@ const CheckoutPage = () => {
         totalCost: roomsINCart[i]?.price,
         paymentMethod: "card",
       };
-      //console.log("requst body", requestBody);
       try {
         const response = await bookRoom(requestBody);
         const result = await readFromReader(response);

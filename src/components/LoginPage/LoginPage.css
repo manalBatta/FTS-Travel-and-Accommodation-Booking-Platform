@@ -9,6 +9,7 @@
     height: 100%;
     background-image: url("/public/cover.png");
     background-size: cover;
+    background-position: center;
   }
 
   .form-container {
@@ -22,11 +23,13 @@
     .welcome-header {
       width: 80%;
       margin: 2px auto;
+
       h1 {
         font-size: 3rem;
         font-weight: 500;
         margin-bottom: 0;
       }
+
       h2 {
         font-size: 1.5rem;
         font-weight: 400;
@@ -39,6 +42,7 @@
       width: 80%;
       gap: 5%;
       margin: 2px auto;
+
       .login-options-container {
         display: flex;
         justify-content: center;
@@ -50,13 +54,111 @@
         font-size: 1.1rem;
         box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
         gap: 5px;
+
         a {
           text-decoration: none;
           color: black;
         }
+
         img {
           width: 25px;
           height: auto;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .cover-img-container {
+      width: 40%;
+    }
+
+    .form-container {
+      width: 60%;
+      padding: 4%;
+
+      .welcome-header h1 {
+        font-size: 2.5rem;
+      }
+
+      .welcome-header h2 {
+        font-size: 1.3rem;
+      }
+
+      .google-apple-container {
+        gap: 3%;
+
+        .login-options-container {
+          padding: 8px;
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+
+    .cover-img-container {
+      width: 100%;
+      height: 50vh;
+    }
+
+    .form-container {
+      width: 100%;
+      align-items: center;
+      padding: 5%;
+
+      .welcome-header {
+        width: 90%;
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        h2 {
+          font-size: 1.2rem;
+        }
+      }
+
+      .google-apple-container {
+        width: 90%;
+        gap: 2%;
+
+        .login-options-container {
+          padding: 6px;
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .cover-img-container {
+      height: 40vh;
+    }
+
+    .form-container {
+      .welcome-header {
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        h2 {
+          font-size: 1rem;
+        }
+      }
+
+      .google-apple-container {
+        gap: 1%;
+
+        .login-options-container {
+          padding: 5px;
+          font-size: 0.8rem;
+
+          img {
+            width: 20px;
+          }
         }
       }
     }

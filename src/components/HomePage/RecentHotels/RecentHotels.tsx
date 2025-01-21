@@ -18,8 +18,10 @@ const RecentHotels = () => {
   };
 
   useEffect(() => {
-    const user: Auth = getUser();
-    getRecent(+user.user_id);
+    const user: Auth | null = getUser();
+    if (user != null) {
+      getRecent(+user.user_id);
+    }
   }, []);
 
   return (

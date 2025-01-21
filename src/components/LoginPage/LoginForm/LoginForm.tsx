@@ -6,7 +6,6 @@ import "./loginButton.css";
 import { LoginValidationSchema } from "./constants";
 import { login, readFromReader } from "../../../APIs";
 import { User } from "../../../Types";
-//import { useAuth } from "../../context/auth";
 
 const LoginForm = () => {
   let navigate = useNavigate();
@@ -30,15 +29,12 @@ const LoginForm = () => {
             if (!result) {
               throw new Error("The response body is undefined or empty.");
             }
-            // setAuthTokens(value);
             localStorage.setItem("auth", result);
-
-            // console.log("from Login form user=", result);
 
             navigate("/", { replace: true });
           }
         } catch (error) {
-          console.error("Login failed:", error);
+          window.alert("Login failed:" + error);
         }
         setSubmitting(false);
       }}>
@@ -64,7 +60,13 @@ const LoginForm = () => {
                 Forget password
               </a>
             </label>
-            <Field id="password" name="password" type="password" required />
+            <Field
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              required
+            />
             {errors.password && touched.password ? (
               <div className="invalid-input-error">{errors.password}</div>
             ) : null}

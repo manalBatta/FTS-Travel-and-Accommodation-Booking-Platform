@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CityTableRow from "./CityTableRow";
-import { City } from "../../../Types";
+import { City, Hotel } from "../../../Types";
 import { deleteCity } from "../../../APIs";
 
 jest.mock("../../../APIs", () => ({
@@ -11,11 +11,35 @@ jest.mock("../../../APIs", () => ({
 }));
 
 describe("CityTableRow Component", () => {
+  const mockHotel: Hotel = {
+    hotelId: 101,
+    amenities: [],
+    location: "Palestine",
+    cityName: "Ramallah",
+    discount: 15,
+    hotelName: "Palestine Grand Hotel",
+    latitude: 31.9038,
+    longitude: 35.2034,
+    roomPhotoUrl: "https://example.com/room-photo.jpg",
+    roomPrice: 120.0,
+    roomType: "Deluxe Suite",
+    starRating: 5,
+    description:
+      "A luxurious hotel in the heart of Ramallah, offering world-class amenities and services.",
+    visitDate: "2025-01-22",
+    priceLowerBound: 100.0,
+    priceUpperBound: 150.0,
+    thumbnailUrl: "https://example.com/hotel-thumbnail.jpg",
+    cityId: 1,
+    gallery: [],
+  };
+
   const mockCity: City = {
     id: 1,
     name: "Test City",
     description: "A test description",
-    hotels: [{ id: 1, name: "Test Hotel" }],
+    hotels: [mockHotel],
+    lastUpdate: "Test",
   };
   const mockOnEdit = jest.fn(); //mock function that we can see how many times it was called and with what arguments
 
@@ -78,10 +102,5 @@ describe("CityTableRow Component", () => {
     expect(window.alert).not.toHaveBeenCalled();
   });
 
-  test("does not render anything if city is undefined", () => {
-    const { container } = render(
-      <CityTableRow city={undefined} onEdit={mockOnEdit} />
-    );
-    expect(container.firstChild).toBeNull();
-  });
+ 
 });

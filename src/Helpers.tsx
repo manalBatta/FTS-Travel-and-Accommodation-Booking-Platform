@@ -3,9 +3,31 @@ import { Auth } from "./Types";
 
 export const getUser = () => {
   const authLocalStorage = localStorage.getItem("auth");
-  const result = authLocalStorage ? JSON.parse(authLocalStorage) : null;
+  if (!authLocalStorage) {
+    console.warn("No auth data found in localStorage");
+    return null;
+  }
+
+  let result;
+  try {
+    result = JSON.parse(authLocalStorage);
+  } catch (error) {
+    console.error("Failed to parse auth data from localStorage:", error);
+    return null;
+  }
+
   const token = result?.authentication;
-  const decodedUser = jwtDecode<Auth>(token);
-  console.log(decodedUser);
-  return decodedUser;
+  if (!token || typeof token !== "string") {
+    console.warn("Token is missing or invalid");
+    return null;
+  }
+
+  try {
+    const decodedUser = jwtDecode<Auth>(token);
+    console.log("Decoded user:", decodedUser);
+    return decodedUser;
+  } catch (error) {
+    console.error("Failed to decode token:", error);
+    return null;
+  }
 };

@@ -1,5 +1,6 @@
 form {
   width: 80%;
+  max-width: 500px;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -10,6 +11,7 @@ form {
     display: flex;
     flex-direction: column;
     margin: 10px 0;
+
     label {
       font-size: 1.1rem;
       margin: 11px 3px;
@@ -22,6 +24,7 @@ form {
         float: right;
       }
     }
+
     input {
       width: 100%;
       border: 1px solid #d9d9d9;
@@ -29,16 +32,19 @@ form {
       padding: 10px;
       font-size: 1.1rem;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+
       &::placeholder {
         color: #d9d9d9;
       }
     }
+
     .invalid-input-error {
       font-size: 0.9rem;
       color: #f70b0b;
       padding: 7px;
     }
   }
+
   .remember-user-checkbox {
     width: fit-content;
     margin: 10px 0;
@@ -48,6 +54,7 @@ form {
       height: 15px;
     }
   }
+
   .login-button {
     button {
       background-color: #9747ff;
@@ -58,6 +65,54 @@ form {
       padding: 10px;
       font-size: 1.1rem;
       box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    width: 90%;
+    margin: 10px auto;
+
+    .input-field {
+      label {
+        font-size: 1rem;
+      }
+
+      input {
+        padding: 8px;
+        font-size: 1rem;
+      }
+    }
+
+    .login-button button {
+      padding: 8px;
+      font-size: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+    margin: 15px auto;
+    .input-field {
+      label {
+        font-size: 0.9rem;
+      }
+
+      input {
+        padding: 6px;
+        font-size: 0.9rem;
+      }
+    }
+
+    .remember-user-checkbox {
+      input {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    .login-button button {
+      padding: 6px;
+      font-size: 0.9rem;
     }
   }
 }

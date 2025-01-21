@@ -37,9 +37,11 @@ describe("SearchBar Component", () => {
     );
     const adultsInput = screen.getByPlaceholderText("2");
     const childrenInput = screen.getAllByPlaceholderText("1")[0];
-    const roomsInput = screen.queryByText("Rooms")?.nextSibling;
-    const checkInDateInput = screen.getByText("When to Pick-up").nextSibling;
-    const checkOutDateInput = screen.getByText("When to Drop-off").nextSibling;
+    const roomsInput = screen.getAllByPlaceholderText("1")[1];
+    const checkInDateInput = screen.getByText("When to Pick-up")
+      .nextSibling as HTMLElement;
+    const checkOutDateInput = screen.getByText("When to Drop-off")
+      .nextSibling as HTMLElement;
 
     // Simulate user input for the city
     fireEvent.change(cityInput, { target: { value: "Paris" } });
@@ -65,6 +67,4 @@ describe("SearchBar Component", () => {
     fireEvent.change(checkOutDateInput, { target: { value: "2025-12-10" } });
     expect(checkOutDateInput).toHaveValue("2025-12-10");
   });
-
-
 });
