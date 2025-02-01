@@ -10,9 +10,14 @@ const TrendingDestinations = () => {
   >([]);
   //create a loop on the destination you get and simplify the card
   const getTrendingDestinations = async () => {
-    const response = await trendingDestinations();
-    const result = await readFromReader(response);
-    if (result) setTrendingDestinationsList(JSON.parse(result));
+    try {
+      const response = await trendingDestinations();
+      const result = await readFromReader(response);
+      if (result) setTrendingDestinationsList(JSON.parse(result));
+    } catch (error) {
+      console.log("Failed to fetch trending destinations");
+    }
+   
   };
   useEffect(() => {
     getTrendingDestinations();
@@ -22,7 +27,7 @@ const TrendingDestinations = () => {
       <li>
         <h1 className="detonations-header">Trending Destinations</h1>
       </li>
-      {trendingDestinationsList?.length &&
+      {(trendingDestinationsList?.length &&
         trendingDestinationsList.map((destination: Destination) => {
           return (
             <motion.li
@@ -57,7 +62,7 @@ const TrendingDestinations = () => {
               </h5>
             </motion.li>
           );
-        })}
+        }))||<img src="/Empty.svg" alt="loading" className="loading" />}
     </ul>
   );
 };

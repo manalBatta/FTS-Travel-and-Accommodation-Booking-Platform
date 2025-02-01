@@ -6,8 +6,8 @@
     "sidebar searchBar "
     "sidebar result ";
   grid-template-rows: minmax(163px, 16%);
-  grid-template-columns: 20% 75%;
-  justify-content: space-evenly;
+/*  grid-template-columns: min-content 75%;
+ */  justify-content: space-evenly;
 
   background-image: url("/public/homeCover.jpg");
   background-size: cover;
@@ -16,20 +16,15 @@
     grid-area: searchBar;
     margin: 3% 20px 0 0;
     background-color: transparent;
-    display: flex;
-    justify-content: space-between;
+   
 
     .search-bar {
       margin: 0;
-      width: 100%;
+      width: 94%;
       min-width: auto;
     }
 
-    .logo {
-      width: 71px;
-      height: 45px;
-      padding: 5px;
-    }
+    
   }
 
   .sidebar {

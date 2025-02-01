@@ -29,10 +29,10 @@ const RecentHotels = () => {
       <li>
         <h1 className="Recent-header">You Recently been in </h1>
       </li>
-      {recentHotelsList?.length &&
+      {(recentHotelsList?.length &&
         recentHotelsList?.map((hotel: Hotel) => {
           return <HotelCard hotel={hotel} key={hotel.hotelId}></HotelCard>;
-        })}
+        }))||<img src="/Empty.svg" alt="loading" className="loading" />}
     </ul>
   );
 };

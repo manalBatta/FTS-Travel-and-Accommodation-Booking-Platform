@@ -47,9 +47,9 @@
   }
 }
 
-.sidebar ul li:hover {
+/* .sidebar ul li:hover {
   background-color: var(--Primary);
-}
+} */
 
 .filter-header {
   display: flex;

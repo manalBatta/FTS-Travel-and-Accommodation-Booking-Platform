@@ -32,32 +32,28 @@ const SearchResultsPage = () => {
   });
 
   const getAmenitiesOptions = async () => {
-    const response = await amenities();
-    const result: string | undefined = await readFromReader(response.clone());
-
-    if (!result) {
-      throw new Error("The response body is undefined or empty.");
+    try {
+      const response = await amenities();
+      const result: string | undefined = await readFromReader(response.clone());
+  
+      if (!result) {
+        throw new Error("The response body is undefined or empty.");
+      }
+      const value = JSON.parse(result);
+      setAmenitiesList(value);
+    } catch (error) {
+      console.error("Failed to fetch amenities:", error);
     }
-    const value = JSON.parse(result);
-    setAmenitiesList(value);
+   
   };
 
   const applyFilter = async () => {
-    // const filter = document.getElementById("amenities") as HTMLSelectElement;
-    // const selectedValue = filter?.value;
-    // if (selectedValue !== "Amenities")
-    //   console.log("Selected value:", selectedValue);
     const response = await searchForAHotel(hotelSearch);
     const result: string | undefined = await readFromReader(response);
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
     setHotels(hotelsSearchResult);
-    // console.log(
-    //   "search for ",
-    //   hotelSearch,
-    //   "get the result",
-    //   hotelsSearchResult
-    // );
+   
   };
 
   useEffect(() => {
@@ -70,12 +66,17 @@ const SearchResultsPage = () => {
   }, [location, specificSearch]);
 
   const getSearchResult = async () => {
-    const searchParams = { ...location.state, ...specificSearch };
+    try {
+      const searchParams = { ...location.state, ...specificSearch };
     const response = await search(searchParams);
     const result: string | undefined = await readFromReader(response);
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
     setHotels(hotelsSearchResult);
+    } catch (error) {
+      console.error("Failed to fetch search result:", error);
+    }
+    
   };
 
   //sorting hotels by stare rating,price
@@ -97,22 +98,18 @@ const SearchResultsPage = () => {
         <Cart></Cart>
         <article className="search-bar-con">
           <SearchBar></SearchBar>
-          <img src="/logo.png" alt="2risem website Logo" className="logo" />
         </article>
-        <article className="sidebar">
-          <div className="filter-header">
-            <h1>Filters</h1>
-            <button onClick={() => setCollapse((prev) => !prev)}>
-              {collapse ? <RxDoubleArrowLeft /> : <RxDoubleArrowRight />}
+        <article className="sidebar" style={collapse?{}:{marginTop:"34px"}}>
+          <div className="filter-header" >
+            {collapse&&<h1>Filters</h1>}
+            <button onClick={() => setCollapse((prev) => !prev)} >
+              {collapse ? <RxDoubleArrowLeft /> : <RxDoubleArrowRight/>}
             </button>
           </div>
 
           <ul
             className="filter-options"
             style={{ display: collapse ? "flex" : "none" }}>
-            <li>
-              <button onClick={applyFilter}>Apply </button>
-            </li>
             <li>
               <RxSketchLogo style={{ color: "#05AEEB" }} />
               <select name="Amenities" id="amenities">
@@ -130,7 +127,7 @@ const SearchResultsPage = () => {
                   ))}
               </select>
             </li>
-            <li style={{ borderBottom: "none" }}>
+            <li >
               <PiElevatorLight style={{ color: "#CD6D00" }} />
               <input
                 type="text"
@@ -155,22 +152,13 @@ const SearchResultsPage = () => {
                     return { ...prev, description: e.target.value };
                   })
                 }
+                onKeyUp={(e) => {
+                  if (e.key === "Enter") applyFilter();
+                }}
               />
             </li>
-            {/* <li>
-              <PiStarHalfLight style={{ color: "#ecbe09" }} />
-              <input
-                type="number"
-                min={1}
-                max={5}
-                placeholder="Stars Rate"
-                onChange={(e) =>
-                  setSpecificSearch((prev) => {
-                    return { ...prev, starRate: Number(e.target.value) };
-                  })
-                }
-              />
-            </li> */}
+            
+           
           </ul>
         </article>
         <article className="result">
@@ -205,14 +193,14 @@ const SearchResultsPage = () => {
           </section>
 
           <ul className="result-body" style={{ boxShadow: "none" }}>
-            {hotels?.length &&
+            {(hotels?.length &&
               hotels.map((hotel) => {
                 if (hotel.starRating < specificSearch.starRate) return "";
                 // Client side filtering -due to server side issue filter is not working-.
                 return (
                   <HotelCard hotel={hotel} key={hotel.hotelId}></HotelCard>
                 );
-              })}
+              }))||<img src="/Empty.svg" alt="loading" className="loading" />}
           </ul>
         </article>
       </div>
