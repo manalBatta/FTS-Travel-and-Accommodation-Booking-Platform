@@ -2,10 +2,8 @@ import React from "react";
 import { City, Hotel } from "../../../Types";
 import { FcDeleteRow } from "react-icons/fc";
 import { deleteCity, readFromReader, updateCity } from "../../../APIs";
-const CityTableRow: React.FC<{
-  city: City;
-  onEdit: (city: City) => void;
-}> = ({ city, onEdit }) => {
+const CityTableRow: React.FC<{city: City;onEdit: (city: City) => void;}> =({ city, onEdit }) => {
+  
   const remove = async (e: React.SyntheticEvent) => {
     e.stopPropagation();
     const confirmed = window.confirm("Assert deleting " + city?.name + " city");
