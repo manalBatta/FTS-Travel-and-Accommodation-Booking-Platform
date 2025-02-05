@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
 import { CartProvider } from "./components/context/cart";
+import Loader from "./Loader";
+
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -11,7 +13,9 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <CartProvider>
-      <App></App>
+      <Suspense fallback={<Loader />}>
+        <App />
+      </Suspense>
     </CartProvider>
   </React.StrictMode>
 );

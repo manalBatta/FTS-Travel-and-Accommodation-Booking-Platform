@@ -1,10 +1,10 @@
-import { motion } from "motion/react";
 import FeaturedDeals from "./FeaturedDeals";
 import "./HomePage.css";
 import Navbar from "./Navbar/Navbar";
 import SearchBar from "./SearchBar/SearchBar";
 import RecentHotels from "./RecentHotels/RecentHotels";
 import TrendingDestinations from "./TrendingDestinations/TrendingDestinations";
+import { motion } from "framer-motion";
 
 const HomePage = () => {
   return (
