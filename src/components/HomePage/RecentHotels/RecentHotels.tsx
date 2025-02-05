@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { readFromReader, recentHotels } from "../../../APIs";
 import { Auth, Hotel } from "../../../Types";
 import HotelCard from "../../HotelCard/HotelCard";
 import { getUser } from "../../../Helpers";
 import "./RecentHotels.css";
-const RecentHotels = () => {
+const RecentHotels = memo(() => {
   const [recentHotelsList, setRecentHotelsList] = useState<Hotel[]>([]);
 
   const getRecent = async (authentication: number) => {
@@ -35,6 +35,6 @@ const RecentHotels = () => {
         }))||<img src="/Empty.svg" alt="loading" className="loading" />}
     </ul>
   );
-};
+});
 
 export default RecentHotels;

@@ -1,14 +1,17 @@
 import { IoLocationOutline } from "react-icons/io5";
-import { Destination } from "../../Types";
-import { readFromReader, trendingDestinations } from "../../APIs";
-import { useEffect, useState } from "react";
+import { Destination } from "../../../Types";
+import { readFromReader, trendingDestinations } from "../../../APIs";
+import { memo, useEffect, useState } from "react";
 import "./TrendingDestinations.css";
-import { motion } from "motion/react";
-const TrendingDestinations = () => {
+import { motion } from "framer-motion";
+
+
+
+
+const TrendingDestinations = memo(() => {
   const [trendingDestinationsList, setTrendingDestinationsList] = useState<
     Destination[]
   >([]);
-  //create a loop on the destination you get and simplify the card
   const getTrendingDestinations = async () => {
     try {
       const response = await trendingDestinations();
@@ -17,7 +20,6 @@ const TrendingDestinations = () => {
     } catch (error) {
       console.log("Failed to fetch trending destinations");
     }
-   
   };
   useEffect(() => {
     getTrendingDestinations();
@@ -37,7 +39,8 @@ const TrendingDestinations = () => {
               whileHover={{
                 scale: 1.01,
                 transition: { duration: 0.5 },
-              }}>
+              }}
+            >
               <img
                 src={destination?.thumbnailUrl || "/default.jpg"}
                 alt="destination gallery"
@@ -48,7 +51,8 @@ const TrendingDestinations = () => {
                   whileInView={{
                     scale: 1.2,
                     transition: { duration: 2.5 },
-                  }}>
+                  }}
+                >
                   <IoLocationOutline />
                 </motion.div>
                 {destination?.cityName}
@@ -62,9 +66,9 @@ const TrendingDestinations = () => {
               </h5>
             </motion.li>
           );
-        }))||<img src="/Empty.svg" alt="loading" className="loading" />}
+        })) || <img src="/Empty.svg" alt="loading" className="loading" />}
     </ul>
   );
-};
+});
 
 export default TrendingDestinations;

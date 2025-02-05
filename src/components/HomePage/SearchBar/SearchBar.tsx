@@ -2,11 +2,11 @@ import { IoIosSearch } from "react-icons/io";
 import { GoPeople } from "react-icons/go";
 import { PiBabyLight } from "react-icons/pi";
 import "./SearchBar.css";
-import { useState } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { SearchDetails, SearchDetailsInitialValue } from "../../../Types";
 
-const SearchBar = () => {
+const SearchBar = memo(() => {
   const [searchDetails, setSearchDetails] = useState<SearchDetails>(
     SearchDetailsInitialValue
   );
@@ -105,6 +105,6 @@ const SearchBar = () => {
       </div>
     </section>
   );
-};
+});
 
 export default SearchBar;

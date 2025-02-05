@@ -4,7 +4,7 @@ import { NavbarProps } from "../../../Types";
 
 const Navbar: React.FC<NavbarProps> = ({
   navItems,
-  user = { name: "nick", iconSrc: "/userIcon.png" },
+  user = { name: "Manal", iconSrc: "/userIcon.png" },
 }) => {
   return (
     <nav>

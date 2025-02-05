@@ -16,7 +16,7 @@ const PaymentForm = ({ pay }: PaymentFormProps) => {
 
   return (
     <div className="payment-form">
-      <h2>Payment</h2>
+      <h2>Payment Details</h2>
       <hr />
       <label>Pay With:</label>
       <div className="payment-options">

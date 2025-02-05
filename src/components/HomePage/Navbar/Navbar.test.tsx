@@ -33,7 +33,7 @@ describe("Navbar Component", () => {
 
   it("renders default user when no user prop is provided", () => {
     render(<Navbar navItems={mockNavItems} />);
-    const userName = screen.getByText("nick");
+    const userName = screen.getByText("Manal");
     const userIcon = screen.getByAltText("User icon");
 
     expect(userName).toBeInTheDocument();

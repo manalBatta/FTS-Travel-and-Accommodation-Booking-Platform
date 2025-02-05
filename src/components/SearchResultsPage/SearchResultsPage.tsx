@@ -35,7 +35,7 @@ const SearchResultsPage = () => {
     try {
       const response = await amenities();
       const result: string | undefined = await readFromReader(response.clone());
-  
+
       if (!result) {
         throw new Error("The response body is undefined or empty.");
       }
@@ -44,7 +44,6 @@ const SearchResultsPage = () => {
     } catch (error) {
       console.error("Failed to fetch amenities:", error);
     }
-   
   };
 
   const applyFilter = async () => {
@@ -53,7 +52,6 @@ const SearchResultsPage = () => {
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
     setHotels(hotelsSearchResult);
-   
   };
 
   useEffect(() => {
@@ -68,15 +66,14 @@ const SearchResultsPage = () => {
   const getSearchResult = async () => {
     try {
       const searchParams = { ...location.state, ...specificSearch };
-    const response = await search(searchParams);
-    const result: string | undefined = await readFromReader(response);
-    if (!result) throw new Error("search result is undefined");
-    const hotelsSearchResult = JSON.parse(result);
-    setHotels(hotelsSearchResult);
+      const response = await search(searchParams);
+      const result: string | undefined = await readFromReader(response);
+      if (!result) throw new Error("search result is undefined");
+      const hotelsSearchResult = JSON.parse(result);
+      setHotels(hotelsSearchResult);
     } catch (error) {
       console.error("Failed to fetch search result:", error);
     }
-    
   };
 
   //sorting hotels by stare rating,price
@@ -99,20 +96,24 @@ const SearchResultsPage = () => {
         <article className="search-bar-con">
           <SearchBar></SearchBar>
         </article>
-        <article className="sidebar" style={collapse?{}:{marginTop:"34px"}}>
-          <div className="filter-header" >
-            {collapse&&<h1>Filters</h1>}
-            <button onClick={() => setCollapse((prev) => !prev)} >
-              {collapse ? <RxDoubleArrowLeft /> : <RxDoubleArrowRight/>}
+        <article
+          className="sidebar"
+          style={collapse ? {} : { marginTop: "34px" }}
+        >
+          <div className="filter-header">
+            {collapse && <h1>Filters</h1>}
+            <button onClick={() => setCollapse((prev) => !prev)}>
+              {collapse ? <RxDoubleArrowLeft /> : <RxDoubleArrowRight />}
             </button>
           </div>
 
           <ul
             className="filter-options"
-            style={{ display: collapse ? "flex" : "none" }}>
+            style={{ display: collapse ? "flex" : "none" }}
+          >
             <li>
               <RxSketchLogo style={{ color: "#05AEEB" }} />
-              <select name="Amenities" id="amenities">
+              <select name="Amenities" id="amenities" data-testid="amenities-toggle">
                 <option value="Amenities" title="Enjoy selecting amenities">
                   Amenities
                 </option>
@@ -121,13 +122,14 @@ const SearchResultsPage = () => {
                     <option
                       value={item.name}
                       title={item.description}
-                      key={item.name}>
+                      key={item.name}
+                    >
                       {item.name}
                     </option>
                   ))}
               </select>
             </li>
-            <li >
+            <li>
               <PiElevatorLight style={{ color: "#CD6D00" }} />
               <input
                 type="text"
@@ -157,8 +159,6 @@ const SearchResultsPage = () => {
                 }}
               />
             </li>
-            
-           
           </ul>
         </article>
         <article className="result">
@@ -185,7 +185,8 @@ const SearchResultsPage = () => {
                 setSpecificSearch((prev) => {
                   return { ...prev, sort: e.target.value };
                 })
-              }>
+              }
+            >
               <option value="roomPrice">Sort By</option>
               <option value="starRating">star Rate</option>
               <option value="roomPrice">price</option>
@@ -200,7 +201,7 @@ const SearchResultsPage = () => {
                 return (
                   <HotelCard hotel={hotel} key={hotel.hotelId}></HotelCard>
                 );
-              }))||<img src="/Empty.svg" alt="loading" className="loading" />}
+              })) || <img src="/Empty.svg" alt="loading" className="loading" />}
           </ul>
         </article>
       </div>

@@ -1,24 +1,23 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { featuredDeals, readFromReader } from "../../../APIs";
 import { FeaturedDealType } from "../../../Types";
 import FeaturedDeal from "./FeaturedDeal/FeaturedDeal";
 import "./FeaturedDeals.css";
 import { get } from "http";
 
-const FeaturedDeals = () => {
-  const [featuredDealsList, setFeaturedDealsList] = useState<FeaturedDealType[]>([]);
-
+const FeaturedDeals = memo(() => {
+  const [featuredDealsList, setFeaturedDealsList] = useState<
+    FeaturedDealType[]
+  >([]);
 
   const getFeaturedDeals = async () => {
     try {
       const response = await featuredDeals();
       const result = await readFromReader(response);
       if (result) setFeaturedDealsList(JSON.parse(result));
-
     } catch (error) {
-      console.log("Failed to fetch featured deals");
+      console.error("Failed to fetch featured deals");
     }
-    
   };
 
   useEffect(() => {
@@ -36,11 +35,11 @@ const FeaturedDeals = () => {
               return (
                 <FeaturedDeal deal={deal} key={deal.hotelId}></FeaturedDeal>
               );
-            }))||<img src="/Empty.svg" alt="loading" className="loading" />}
+            })) || <img src="/Empty.svg" alt="loading" className="loading" />}
         </ul>
       </article>
     </>
   );
-};
+});
 
 export default FeaturedDeals;

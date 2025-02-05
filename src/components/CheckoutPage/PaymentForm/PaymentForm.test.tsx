@@ -33,7 +33,7 @@ describe("PaymentForm", () => {
   test("renders PaymentForm with default Card option", () => {
     renderComponent();
 
-    expect(screen.getByText("Payment")).toBeInTheDocument();
+    expect(screen.getByText("Payment Details")).toBeInTheDocument();
     expect(screen.getByLabelText("Card")).toBeChecked();
     expect(
       screen.getByPlaceholderText("1234 5678 9101 1121")

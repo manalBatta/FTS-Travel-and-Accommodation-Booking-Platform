@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { memo, useState } from "react";
 import "./PopupForm.css"; // Add CSS for centering and styling
 import Button from "../../Button/Button";
 // Assuming you have a reusable Button component
@@ -11,7 +11,7 @@ interface PopupFormProps {
   cityDescription?: string;
 }
 
-const PopupForm: React.FC<PopupFormProps> = ({
+const PopupForm: React.FC<PopupFormProps> = memo(({
   isVisible,
   onClose,
   onUpdate,
@@ -61,6 +61,6 @@ const PopupForm: React.FC<PopupFormProps> = ({
       </div>
     </div>
   );
-};
+});
 
 export default PopupForm;

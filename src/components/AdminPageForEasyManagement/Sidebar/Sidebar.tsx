@@ -10,9 +10,9 @@ const Sidebar: React.FC = () => {
   return (
     <>
       <aside
-        className="sidebar"
+        className="sidebar1"
         style={{ display: collapse ? "block" : "none" }}>
-        <div className="filter-header">
+        <div className="filter-header1">
           <h1>Filters</h1>
         </div>
         <ul style={{ display: collapse ? "block" : "none" }}>
@@ -31,7 +31,7 @@ const Sidebar: React.FC = () => {
       </aside>{" "}
       <button
         onClick={() => setCollapse((prev) => !prev)}
-        className="collapse-btn">
+        className="collapse-btn1">
         {collapse ? <RxDoubleArrowLeft /> : <RxDoubleArrowRight />}
       </button>
     </>

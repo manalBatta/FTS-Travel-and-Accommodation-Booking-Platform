@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-const TableHeader: React.FC<{ headers: String[] }> = ({ headers }) => {
+const TableHeader: React.FC<{ headers: String[] }> = memo(({ headers }) => {
   return (
     <div className="table-header">
       {headers.map((head) => (
@@ -8,6 +8,6 @@ const TableHeader: React.FC<{ headers: String[] }> = ({ headers }) => {
       ))}
     </div>
   );
-};
+});
 
 export default TableHeader;

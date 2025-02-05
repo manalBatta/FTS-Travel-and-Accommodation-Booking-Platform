@@ -3,7 +3,7 @@ import { IoIosSearch } from "react-icons/io";
 
 const SearchBar: React.FC = () => {
   return (
-    <div className="search-bar">
+    <div className="search-bar1">
       <button className="search-icon">
         {" "}
         <IoIosSearch />

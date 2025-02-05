@@ -4,7 +4,7 @@ import "./HomePage.css";
 import Navbar from "./Navbar/Navbar";
 import SearchBar from "./SearchBar/SearchBar";
 import RecentHotels from "./RecentHotels/RecentHotels";
-import TrendingDestinations from "../TrendingDestinations/TrendingDestinations";
+import TrendingDestinations from "./TrendingDestinations/TrendingDestinations";
 
 const HomePage = () => {
   return (
@@ -16,7 +16,9 @@ const HomePage = () => {
             { name: "Featured Deals", link: "#Featured" },
             { name: "Trending Destination", link: "#Trending" },
             { name: "Recently Visited", link: "#Recently" },
-          ]}></Navbar>{" "}
+            { name: "Login", link: "/auth/login" },
+          ]}
+        ></Navbar>{" "}
         <div className="search-container">
           <h1>Discover the most engaging places</h1>
           <SearchBar></SearchBar>
@@ -31,7 +33,8 @@ const HomePage = () => {
             backgroundColor: "white",
             opacity: 1,
             transition: { duration: 2 },
-          }}>
+          }}
+        >
           <FeaturedDeals></FeaturedDeals>
         </motion.article>
         <motion.article
@@ -42,7 +45,8 @@ const HomePage = () => {
             backgroundColor: "white",
             opacity: 1,
             transition: { duration: 2 },
-          }}>
+          }}
+        >
           <RecentHotels></RecentHotels>
         </motion.article>
         <motion.article
@@ -53,7 +57,8 @@ const HomePage = () => {
             backgroundColor: "white",
             opacity: 1,
             transition: { duration: 2 },
-          }}>
+          }}
+        >
           <TrendingDestinations></TrendingDestinations>
         </motion.article>
       </main>

@@ -50,22 +50,10 @@ const router = createBrowserRouter([
   },
 ]);
 function App() {
-  // const [authTokens, setAuthTokens] = useState<AuthTokens>({
-  //   authentication: "none",
-  //   userType: "user",
-  // });
-
-  // const setTokens = (data: AuthTokens) => {
-  //   localStorage.setItem("tokens", JSON.stringify(data));
-  //   setAuthTokens(data);
-  // };
+ 
 
   return (
-    //   <AuthContext.Provider
-    // value={{ authTokens, setAuthTokens: setTokens }}
-    //  >
     <RouterProvider router={router} />
-    //    </AuthContext.Provider>
   );
 }
 

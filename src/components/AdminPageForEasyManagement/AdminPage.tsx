@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 
 import "./AdminPage.css";
 import Sidebar from "./Sidebar/Sidebar";
@@ -59,31 +59,31 @@ const AdminPage: React.FC = () => {
     setIsPopupVisible(true);
   };
 
-  const handleUpdate = async () => {
+  const handleUpdate =useCallback( async () => {
     if (selectedCity) {
       const response = await updateCity(selectedCity);
       if (response.ok) window.alert("updated " + selectedCity.name + " city");
-      //if the city is not found it will be 404
       else window.alert("couldn't update city server error");
     }
     setIsPopupVisible(false);
-  };
+  },[selectedCity]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setIsPopupVisible(false);
-  };
+  },[]);
 
   useEffect(() => {
     cities();
   }, []);
 
+  const headers = useMemo(()=>["name", "description", "number of hotels"],[]);
   return (
     <div className="admin-page">
       <Sidebar />
       <main className="content">
         <SearchBar />
         <div className="table-container">
-          <TableHeader headers={["name", "description", "number of hotels"]} />
+          <TableHeader headers={headers} />
           {cityTableData.map((row, index) => (
             <CityTableRow key={index} city={row} onEdit={handleEdit} />
           ))}

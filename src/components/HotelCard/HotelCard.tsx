@@ -4,11 +4,12 @@ import { IoMdStar } from "react-icons/io";
 import { Amenity, Hotel } from "../../Types";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
+import { memo } from "react";
 
 interface HotelCardProps extends React.HTMLAttributes<HTMLDivElement> {
   hotel: Hotel;
 }
-const HotelCard = ({ hotel }: HotelCardProps) => {
+const HotelCard = memo(({ hotel }: HotelCardProps) => {
   return (
     <li className="hotel" key={hotel?.hotelId?.toString()}>
       <img
@@ -51,6 +52,6 @@ const HotelCard = ({ hotel }: HotelCardProps) => {
       </h6>
     </li>
   );
-};
+});
 
 export default HotelCard;
