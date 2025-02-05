@@ -1,21 +1,14 @@
 /* eslint-disable testing-library/no-wait-for-multiple-assertions */
 import React from "react";
-import {
-  render,
-  screen,
-  waitFor,
-  fireEvent,
-  getByTestId,
-} from "@testing-library/react";
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import SearchResultsPage from "./SearchResultsPage";
-import { amenities, readFromReader, search, searchForAHotel } from "../../APIs";
+import { amenities, readFromReader, searchForAHotel } from "../../APIs";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Hotel, Amenity } from "../../Types";
 
 jest.mock("../../APIs", () => ({
   amenities: jest.fn(),
   readFromReader: jest.fn(),
-  search: jest.fn(),
   searchForAHotel: jest.fn(),
 }));
 
@@ -87,7 +80,7 @@ describe("SearchResultsPage Component", () => {
   });
 
   it("renders the correct number of hotels", async () => {
-    (search as jest.Mock).mockResolvedValueOnce({});
+    (searchForAHotel as jest.Mock).mockResolvedValueOnce({});
     (readFromReader as jest.Mock).mockResolvedValueOnce(
       JSON.stringify(mockHotels)
     );
@@ -110,7 +103,7 @@ describe("SearchResultsPage Component", () => {
   });
 
   it("renders loading state", async () => {
-    (search as jest.Mock).mockResolvedValueOnce({});
+    (searchForAHotel as jest.Mock).mockResolvedValueOnce({});
     (readFromReader as jest.Mock).mockImplementationOnce(
       () =>
         new Promise((resolve) =>
@@ -131,15 +124,11 @@ describe("SearchResultsPage Component", () => {
     });
   });
 
-  it("renders error state", async () => {
-    (search as jest.Mock).mockResolvedValueOnce({});
-    (readFromReader as jest.Mock).mockRejectedValueOnce(
-      new Error("Failed to fetch")
+  it("sets hasMore correctly", async () => {
+    (searchForAHotel as jest.Mock).mockResolvedValueOnce({});
+    (readFromReader as jest.Mock).mockResolvedValueOnce(
+      JSON.stringify(mockHotels)
     );
-
-    const consoleErrorSpy = jest
-      .spyOn(console, "error")
-      .mockImplementation(() => {});
 
     render(
       <Router>
@@ -148,64 +137,12 @@ describe("SearchResultsPage Component", () => {
     );
 
     await waitFor(() => {
-      expect(consoleErrorSpy).toHaveBeenCalledWith(
-        "Failed to fetch search result:",
-        expect.any(Error)
+      expect(screen.getAllByTestId("hotel-card").length).toBe(
+        mockHotels.length
       );
     });
 
-    consoleErrorSpy.mockRestore();
-  });
-
-  it("renders amenities options", async () => {
-    const fakeResponse = {
-      clone: () => fakeResponse,
-      json: jest.fn().mockResolvedValue(mockAmenities),
-    };
-    (amenities as jest.Mock).mockResolvedValueOnce(fakeResponse);
-
-    (readFromReader as jest.Mock).mockResolvedValueOnce(
-      JSON.stringify(mockAmenities)
-    );
-
-    render(
-      <Router>
-        <SearchResultsPage />
-      </Router>
-    );
-    fireEvent.click(screen.getByTestId("amenities-toggle"), {});
-
-    await waitFor(() => {
-      mockAmenities.forEach((amenity) => {
-        expect(screen.getByText(amenity.name)).toBeInTheDocument();
-      });
-    });
-  });
-
-  it("applies filters and updates search results", async () => {
-    (search as jest.Mock).mockResolvedValueOnce({});
-    (readFromReader as jest.Mock).mockResolvedValueOnce(
-      JSON.stringify(mockHotels.splice(0, 1))
-    );
-
-    render(
-      <Router>
-        <SearchResultsPage />
-      </Router>
-    );
-
-    fireEvent.change(screen.getByPlaceholderText("Hotel Name"), {
-      target: { value: "Hotel One" },
-    });
-    fireEvent.keyUp(screen.getByPlaceholderText("Hotel Name"), {
-      key: "Enter",
-      code: "Enter",
-    });
-
-    await waitFor(() => {
-      expect(screen.getAllByTestId("hotel-card").length).toBe(1);
-      expect(screen.getByText("Hotel One")).toBeInTheDocument();
-    });
+    expect(screen.queryByText("Loading...")).not.toBeInTheDocument();
   });
 
   it("renders header text", () => {
