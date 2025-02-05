@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import SearchBar from "../HomePage/SearchBar/SearchBar";
+import InfiniteScroll from "react-infinite-scroll-component";
 import "./SearchResultsPage.css";
 import {
   RxDoubleArrowRight,
@@ -9,7 +10,6 @@ import {
 import { PiElevatorLight, PiStarHalfLight } from "react-icons/pi";
 import { amenities, readFromReader, search, searchForAHotel } from "../../APIs";
 import { SearchHotel, Hotel, Amenity } from "../../Types";
-
 import { useLocation } from "react-router-dom";
 import { MdOutlineManageSearch } from "react-icons/md";
 import HotelCard from "../HotelCard/HotelCard";
@@ -20,6 +20,7 @@ const SearchResultsPage = () => {
   const [collapse, setCollapse] = useState(true);
   const [amenitiesList, setAmenitiesList] = useState<Amenity[]>([]);
   const [hotels, setHotels] = useState<Hotel[]>([]);
+  const [hasMore, setHasMore] = useState(true);
   const [specificSearch, setSpecificSearch] = useState({
     starRate: 1,
     sort: "desc",
@@ -51,17 +52,16 @@ const SearchResultsPage = () => {
     const result: string | undefined = await readFromReader(response);
     if (!result) throw new Error("search result is undefined");
     const hotelsSearchResult = JSON.parse(result);
-    setHotels(hotelsSearchResult);
+    if (hotelSearch.pageNumber === 1) {
+      setHotels(hotelsSearchResult);
+    } else {
+      setHotels((prev) => {
+        return [...prev, ...hotelsSearchResult];
+      });
+    }
+
+    setHasMore(hotelsSearchResult.length >= hotelSearch.pageSize);
   };
-
-  useEffect(() => {
-    getAmenitiesOptions();
-  }, []);
-
-  useEffect(() => {
-    getSearchResult();
-    console.log("triggered change");
-  }, [location, specificSearch]);
 
   const getSearchResult = async () => {
     try {
@@ -76,19 +76,31 @@ const SearchResultsPage = () => {
     }
   };
 
-  //sorting hotels by stare rating,price
-  hotels?.sort((a, b) => {
-    const key = specificSearch.sort;
+  const loadMoreHotels = () => {
+    setHotelSearch((prev) => ({ ...prev, pageNumber: prev.pageNumber + 1 }));
+  };
 
-    if (key === "starRating") {
+  useEffect(() => {
+    applyFilter();
+  }, [hotelSearch.pageNumber]);
+
+  useEffect(() => {
+    getAmenitiesOptions();
+  }, []);
+
+  useEffect(() => {
+    getSearchResult();
+    console.log("triggered change");
+  }, [location, specificSearch]);
+
+  //sorting hotels by stare rating,price
+  const sortedHotels = [...hotels].sort((a, b) => {
+    if (specificSearch.sort === "starRating")
       return b.starRating - a.starRating;
-    }
-    if (key === "roomPrice") {
-      return a.roomPrice - b.roomPrice;
-    }
+    if (specificSearch.sort === "roomPrice") return a.roomPrice - b.roomPrice;
     return 0;
   });
-  // console.log("from search result", hotels);
+
   return (
     <>
       <div className="search-result-container">
@@ -113,7 +125,11 @@ const SearchResultsPage = () => {
           >
             <li>
               <RxSketchLogo style={{ color: "#05AEEB" }} />
-              <select name="Amenities" id="amenities" data-testid="amenities-toggle">
+              <select
+                name="Amenities"
+                id="amenities"
+                data-testid="amenities-toggle"
+              >
                 <option value="Amenities" title="Enjoy selecting amenities">
                   Amenities
                 </option>
@@ -139,7 +155,11 @@ const SearchResultsPage = () => {
                 }}
                 onChange={(e) =>
                   setHotelSearch((prev) => {
-                    return { ...prev, name: e.target.value.toString() };
+                    return {
+                      ...prev,
+                      name: e.target.value.toString(),
+                      pageNumber: 1,
+                    };
                   })
                 }
               />
@@ -151,7 +171,11 @@ const SearchResultsPage = () => {
                 placeholder=" description..."
                 onChange={(e) =>
                   setHotelSearch((prev) => {
-                    return { ...prev, description: e.target.value };
+                    return {
+                      ...prev,
+                      description: e.target.value,
+                      pageNumber: 1,
+                    };
                   })
                 }
                 onKeyUp={(e) => {
@@ -192,17 +216,25 @@ const SearchResultsPage = () => {
               <option value="roomPrice">price</option>
             </select>
           </section>
-
-          <ul className="result-body" style={{ boxShadow: "none" }}>
-            {(hotels?.length &&
-              hotels.map((hotel) => {
-                if (hotel.starRating < specificSearch.starRate) return "";
-                // Client side filtering -due to server side issue filter is not working-.
-                return (
-                  <HotelCard hotel={hotel} key={hotel.hotelId}></HotelCard>
-                );
-              })) || <img src="/Empty.svg" alt="loading" className="loading" />}
-          </ul>
+          <InfiniteScroll
+            dataLength={hotels.length}
+            next={loadMoreHotels}
+            hasMore={hasMore}
+            loader={<h4>Loading...</h4>}
+          >
+            <ul className="result-body" style={{ boxShadow: "none" }}>
+              {(sortedHotels?.length &&
+                sortedHotels
+                  .filter(
+                    (hotel) => hotel.starRating >= specificSearch.starRate
+                  )
+                  .map((hotel) => (
+                    <HotelCard hotel={hotel} key={hotel.hotelId} />
+                  ))) || (
+                <img src="/Empty.svg" alt="loading" className="loading" />
+              )}
+            </ul>
+          </InfiniteScroll>
         </article>
       </div>
     </>
