@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import "./CheckoutPage.css";
 import { CartContext } from "../context/cart";
 import { BookingDetails, RoomType } from "../../Types";
-import { bookRoom, readFromReader, roomDetails } from "../../APIs";
+import { bookRoom, readFromReader, roomDetails } from "../../services/APIs";
 import { getUser } from "../../Helpers";
 import Room from "../HotelPage/Room/Room";
 import PaymentForm from "./PaymentForm/PaymentForm";
@@ -37,7 +37,7 @@ const CheckoutPage = () => {
     const paymentConfirmation = [];
     for (let i = 0; i < cartItems.length; i++) {
       const requestBody: BookingDetails = {
-        customerName: user?.given_name||"",
+        customerName: user?.given_name || "",
         hotelName: cartItems[i]?.hotelName,
         roomNumber: roomsINCart[i]?.roomNumber.toString(),
         roomType: roomsINCart[i]?.roomType,
@@ -77,7 +77,8 @@ const CheckoutPage = () => {
                       key={cartItems[index] && room.roomId}
                       room={room}
                       hotelName={cartItems[index]?.hotelName}
-                      details={true}></Room>
+                      details={true}
+                    ></Room>
                   );
                 })}
             </div>

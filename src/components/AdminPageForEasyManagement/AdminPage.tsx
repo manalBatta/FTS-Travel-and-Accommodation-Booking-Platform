@@ -6,7 +6,12 @@ import SearchBar from "./SearchBar";
 import TableHeader from "./TableHeader";
 import CityTableRow from "./CityTableRow/CityTableRow";
 import Pagination from "./Pagination";
-import { getCities, getCity, readFromReader, updateCity } from "../../APIs";
+import {
+  getCities,
+  getCity,
+  readFromReader,
+  updateCity,
+} from "../../services/APIs";
 import { City } from "../../Types";
 import PopupForm from "./PopupForm/PopupForm";
 
@@ -59,24 +64,27 @@ const AdminPage: React.FC = () => {
     setIsPopupVisible(true);
   };
 
-  const handleUpdate =useCallback( async () => {
+  const handleUpdate = useCallback(async () => {
     if (selectedCity) {
       const response = await updateCity(selectedCity);
       if (response.ok) window.alert("updated " + selectedCity.name + " city");
       else window.alert("couldn't update city server error");
     }
     setIsPopupVisible(false);
-  },[selectedCity]);
+  }, [selectedCity]);
 
   const handleClose = useCallback(() => {
     setIsPopupVisible(false);
-  },[]);
+  }, []);
 
   useEffect(() => {
     cities();
   }, []);
 
-  const headers = useMemo(()=>["name", "description", "number of hotels"],[]);
+  const headers = useMemo(
+    () => ["name", "description", "number of hotels"],
+    []
+  );
   return (
     <div className="admin-page">
       <Sidebar />

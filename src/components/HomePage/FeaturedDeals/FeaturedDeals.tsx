@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { featuredDeals, readFromReader } from "../../../APIs";
+import { featuredDeals, readFromReader } from "../../../services/APIs";
 import { FeaturedDealType } from "../../../Types";
 import FeaturedDeal from "./FeaturedDeal/FeaturedDeal";
 import "./FeaturedDeals.css";

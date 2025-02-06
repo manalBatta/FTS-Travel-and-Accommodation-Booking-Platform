@@ -2,7 +2,11 @@
 import React from "react";
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import SearchResultsPage from "./SearchResultsPage";
-import { amenities, readFromReader, searchForAHotel } from "../../APIs";
+import {
+  amenities,
+  readFromReader,
+  searchForAHotel,
+} from "../../services/APIs";
 import { BrowserRouter as Router } from "react-router-dom";
 import { Hotel, Amenity } from "../../Types";
 

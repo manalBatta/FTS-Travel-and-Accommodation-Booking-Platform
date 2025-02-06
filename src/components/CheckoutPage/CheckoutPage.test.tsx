@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import CheckoutPage from "./CheckoutPage";
 import { CartContext } from "../context/cart";
 import { BrowserRouter as Router, useNavigate } from "react-router-dom";
-import { bookRoom, readFromReader, roomDetails } from "../../APIs";
+import { bookRoom, readFromReader, roomDetails } from "../../services/APIs";
 import { getUser } from "../../Helpers";
 import "@testing-library/jest-dom/extend-expect";
 import { RoomType, CartItem } from "../../Types";

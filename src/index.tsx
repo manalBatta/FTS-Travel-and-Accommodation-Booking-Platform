@@ -3,8 +3,8 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
-import { CartProvider } from "./components/context/cart";
 import Loader from "./Loader";
+import { CartProvider } from "./context/cart";
 
 
 const root = ReactDOM.createRoot(

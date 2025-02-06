@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { hotel, hotelGallery, readFromReader } from "../../APIs";
+import { hotel, hotelGallery, readFromReader } from "../../services/APIs";
 import { Hotel, initialHotel } from "../../Types";
 import Navbar from "../HomePage/Navbar/Navbar";
 import { IoLocationOutline } from "react-icons/io5";
@@ -62,7 +62,8 @@ const HotelPage = () => {
           { name: "Description", link: "#Description" },
           { name: "Available Rooms", link: "#AvailableRooms" },
           { name: "Rating & Reviews", link: "#RatingReviews" },
-        ]}></Navbar>
+        ]}
+      ></Navbar>
       <h1 className="hotel-name">
         {hotelDetails?.hotelName}
         <span className="hotel-location">
@@ -88,7 +89,8 @@ const HotelPage = () => {
         latitude={hotelDetails.latitude}
         longitude={hotelDetails.longitude}
         hotelName={hotelDetails.hotelName}
-        description={hotelDetails.description}></MapWithDynamicData>
+        description={hotelDetails.description}
+      ></MapWithDynamicData>
 
       <Rooms hotelName={hotelDetails.hotelName}></Rooms>
 

@@ -4,12 +4,11 @@ import { useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 import "./loginButton.css";
 import { LoginValidationSchema } from "./constants";
-import { login, readFromReader } from "../../../APIs";
+import { login, readFromReader } from "../../../services/APIs";
 import { User } from "../../../Types";
 
 const LoginForm = () => {
   let navigate = useNavigate();
-  //const { setAuthTokens } = useAuth();
 
   return (
     <Formik
@@ -37,7 +36,8 @@ const LoginForm = () => {
           window.alert("Login failed:" + error);
         }
         setSubmitting(false);
-      }}>
+      }}
+    >
       {({ errors, touched }) => (
         <Form>
           <div className="input-field">
@@ -84,7 +84,8 @@ const LoginForm = () => {
             <button
               id="login-btn"
               type="submit"
-              className="hvr-sweep-to-right hvr-grow">
+              className="hvr-sweep-to-right hvr-grow"
+            >
               Login
             </button>
           </div>

@@ -8,7 +8,12 @@ import {
   RxSketchLogo,
 } from "react-icons/rx";
 import { PiElevatorLight, PiStarHalfLight } from "react-icons/pi";
-import { amenities, readFromReader, search, searchForAHotel } from "../../APIs";
+import {
+  amenities,
+  readFromReader,
+  search,
+  searchForAHotel,
+} from "../../services/APIs";
 import { SearchHotel, Hotel, Amenity } from "../../Types";
 import { useLocation } from "react-router-dom";
 import { MdOutlineManageSearch } from "react-icons/md";

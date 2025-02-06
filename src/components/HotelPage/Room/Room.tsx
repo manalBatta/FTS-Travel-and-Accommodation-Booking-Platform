@@ -4,7 +4,7 @@ import "./Room.css";
 import { motion } from "motion/react";
 import { MdOutlineCancel } from "react-icons/md";
 import { useContext } from "react";
-import { CartContext } from "../../context/cart";
+import { CartContext } from "../../../context/cart";
 
 const Room: React.FC<RoomProps> = ({ room, hotelName, details }: RoomProps) => {
   const { addToCart, removeFromCart } = useContext(CartContext);

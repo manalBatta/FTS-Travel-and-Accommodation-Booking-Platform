@@ -6,11 +6,15 @@ import {
   SearchDetails,
   SearchDetailsInitialValue,
 } from "../../../Types";
-import { hotelAvailableRooms, hotelRooms, readFromReader } from "../../../APIs";
+import {
+  hotelAvailableRooms,
+  hotelRooms,
+  readFromReader,
+} from "../../../services/APIs";
 import Room from "../Room/Room";
 import { motion } from "motion/react";
 import Button from "../../Button/Button";
-import { CartContext } from "../../context/cart";
+import { CartContext } from "../../../context/cart";
 import Cart from "../../Cart/Cart";
 
 type RoomsProps = {
@@ -56,7 +60,8 @@ const Rooms = ({ hotelName }: RoomsProps) => {
       <Cart></Cart>
       <motion.h4
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}>
+        animate={{ opacity: 1, scale: 1 }}
+      >
         Available Rooms
       </motion.h4>
       <section className="header">
@@ -143,7 +148,8 @@ const Rooms = ({ hotelName }: RoomsProps) => {
                 key={room.roomId}
                 room={room}
                 hotelName={hotelName}
-                details={false}></Room>
+                details={false}
+              ></Room>
             );
           })}
       </section>

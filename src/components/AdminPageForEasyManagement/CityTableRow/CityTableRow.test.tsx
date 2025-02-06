@@ -3,7 +3,7 @@ import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import CityTableRow from "./CityTableRow";
 import { City, Hotel } from "../../../Types";
-import { deleteCity } from "../../../APIs";
+import { deleteCity } from "../../../services/APIs";
 
 jest.mock("../../../APIs", () => ({
   deleteCity: jest.fn(),
@@ -101,6 +101,4 @@ describe("CityTableRow Component", () => {
     expect(deleteCity).not.toHaveBeenCalled();
     expect(window.alert).not.toHaveBeenCalled();
   });
-
- 
 });

@@ -1,6 +1,6 @@
-import { getUser } from "./Helpers";
-import * as types from "./Types";
-import { Auth, CitiesRequest, City } from "./Types";
+import { getUser } from "../Helpers";
+import * as types from "../Types";
+import { Auth, CitiesRequest, City } from "../Types";
 const baseURL =
   "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
 
@@ -72,11 +72,6 @@ export const recentHotels = async (userId: number) => {
   if (!token) {
     throw new Error("Authorization token is missing");
   }
-
-  // console.log(
-  //   "from request of recent hotels api",
-  //   `/home/users/${userId}/recent-hotels`
-  // );
 
   return await fetch(baseURL + `/home/users/${userId}/recent-hotels`, {
     method: "GET",

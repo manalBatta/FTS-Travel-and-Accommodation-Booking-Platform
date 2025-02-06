@@ -1,12 +1,9 @@
 import { IoLocationOutline } from "react-icons/io5";
 import { Destination } from "../../../Types";
-import { readFromReader, trendingDestinations } from "../../../APIs";
+import { readFromReader, trendingDestinations } from "../../../services/APIs";
 import { memo, useEffect, useState } from "react";
 import "./TrendingDestinations.css";
 import { motion } from "framer-motion";
-
-
-
 
 const TrendingDestinations = memo(() => {
   const [trendingDestinationsList, setTrendingDestinationsList] = useState<

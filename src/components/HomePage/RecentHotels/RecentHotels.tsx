@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from "react";
-import { readFromReader, recentHotels } from "../../../APIs";
+import { readFromReader, recentHotels } from "../../../services/APIs";
 import { Auth, Hotel } from "../../../Types";
 import HotelCard from "../../HotelCard/HotelCard";
 import { getUser } from "../../../Helpers";
@@ -32,7 +32,7 @@ const RecentHotels = memo(() => {
       {(recentHotelsList?.length &&
         recentHotelsList?.map((hotel: Hotel) => {
           return <HotelCard hotel={hotel} key={hotel.hotelId}></HotelCard>;
-        }))||<img src="/Empty.svg" alt="loading" className="loading" />}
+        })) || <img src="/Empty.svg" alt="loading" className="loading" />}
     </ul>
   );
 });

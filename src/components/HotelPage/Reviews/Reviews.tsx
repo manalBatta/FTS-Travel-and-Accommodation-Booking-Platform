@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { IoMdStar } from "react-icons/io";
 import { Review } from "../../../Types";
 import { useLocation } from "react-router-dom";
-import { readFromReader, hotelReviews } from "../../../APIs";
+import { readFromReader, hotelReviews } from "../../../services/APIs";
 import Button from "../../Button/Button";
 import { MdArrowBackIosNew, MdArrowForwardIos } from "react-icons/md";
 
@@ -49,7 +49,8 @@ const Reviews = () => {
     <article className="reviews-con" id="RatingReviews">
       <motion.h4
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}>
+        animate={{ opacity: 1, scale: 1 }}
+      >
         Rating & Reviews
       </motion.h4>
       <section className="slider">
@@ -62,7 +63,8 @@ const Reviews = () => {
             className="rev-con"
             initial={{ opacity: 0.5 }}
             whileInView={{ scale: [null, 1.1, 1], opacity: 1 }}
-            transition={{ duration: 0.4 }}>
+            transition={{ duration: 0.4 }}
+          >
             <div className="rev-header">
               <h1>{review?.customerName}</h1>
               <span>

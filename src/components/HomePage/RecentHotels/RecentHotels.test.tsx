@@ -1,7 +1,7 @@
 import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import RecentHotels from "./RecentHotels";
-import { recentHotels, readFromReader } from "../../../APIs";
+import { recentHotels, readFromReader } from "../../../services/APIs";
 import { getUser } from "../../../Helpers";
 import { Hotel } from "../../../Types";
 
@@ -81,7 +81,9 @@ describe("RecentHotels Component", () => {
     render(<RecentHotels />);
 
     await waitFor(() => {
-      expect(screen.getAllByTestId("hotel-card").length).toBe(mockHotels.length);
+      expect(screen.getAllByTestId("hotel-card").length).toBe(
+        mockHotels.length
+      );
     });
 
     mockHotels.forEach((hotel) => {
@@ -93,7 +95,10 @@ describe("RecentHotels Component", () => {
     (getUser as jest.Mock).mockReturnValue({ user_id: 1 });
     (recentHotels as jest.Mock).mockResolvedValueOnce({});
     (readFromReader as jest.Mock).mockImplementationOnce(
-      () => new Promise((resolve) => setTimeout(() => resolve(JSON.stringify(mockHotels)), 100))
+      () =>
+        new Promise((resolve) =>
+          setTimeout(() => resolve(JSON.stringify(mockHotels)), 100)
+        )
     );
 
     render(<RecentHotels />);
@@ -108,14 +113,21 @@ describe("RecentHotels Component", () => {
   it("renders error state", async () => {
     (getUser as jest.Mock).mockReturnValue({ user_id: 1 });
     (recentHotels as jest.Mock).mockResolvedValueOnce({});
-    (readFromReader as jest.Mock).mockRejectedValueOnce(new Error("Failed to fetch"));
+    (readFromReader as jest.Mock).mockRejectedValueOnce(
+      new Error("Failed to fetch")
+    );
 
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const consoleErrorSpy = jest
+      .spyOn(console, "error")
+      .mockImplementation(() => {});
 
     render(<RecentHotels />);
 
     await waitFor(() => {
-        expect(consoleErrorSpy).toHaveBeenCalledWith("Failed to load recent hotels:", expect.any(Error));
+      expect(consoleErrorSpy).toHaveBeenCalledWith(
+        "Failed to load recent hotels:",
+        expect.any(Error)
+      );
     });
 
     consoleErrorSpy.mockRestore();
