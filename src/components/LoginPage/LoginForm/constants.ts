@@ -6,7 +6,7 @@ export const LoginValidationSchema = Yup.object().shape({
     .max(50, "Too Long!")
     .required("Required"),
   password: Yup.string()
-    // .min(8, "Password must be at least 8 characters")
+     .min(3, "Password must be at least 3 characters")
     // .max(20, "Password cannot exceed 20 characters")
     // .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
     // .matches(/[a-z]/, "Password must contain at least one lowercase letter")
