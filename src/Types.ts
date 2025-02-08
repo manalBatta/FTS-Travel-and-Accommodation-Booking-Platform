@@ -156,6 +156,7 @@ export interface CartContextValue {
   removeFromCart: (id: number) => void;
   clearCart: () => void;
   cartItems: CartItem[];
+  isReserved: (id: number) => boolean;
 }
 
 export type RoomProps = {

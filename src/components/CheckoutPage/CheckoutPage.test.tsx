@@ -1,12 +1,12 @@
 /* eslint-disable testing-library/no-wait-for-multiple-assertions */
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import CheckoutPage from "./CheckoutPage";
-import { CartContext } from "../context/cart";
 import { BrowserRouter as Router, useNavigate } from "react-router-dom";
 import { bookRoom, readFromReader, roomDetails } from "../../services/APIs";
 import { getUser } from "../../Helpers";
 import "@testing-library/jest-dom/extend-expect";
 import { RoomType, CartItem } from "../../Types";
+import { CartContext } from "../../context/cart";
 
 jest.mock("../../APIs");
 jest.mock("../../Helpers");
@@ -51,7 +51,8 @@ const setup = () => {
           cartItems: mockCartItems,
           addToCart: jest.fn(),
           removeFromCart: jest.fn(),
-          clearCart: jest.fn(),
+          clearCart: jest.fn(),          isReserved: jest.fn(),
+
         }}
       >
         <CheckoutPage />

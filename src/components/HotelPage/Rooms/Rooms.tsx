@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 import "./Rooms.css";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   RoomType,
   SearchDetails,
@@ -14,7 +14,6 @@ import {
 import Room from "../Room/Room";
 import { motion } from "motion/react";
 import Button from "../../Button/Button";
-import { CartContext } from "../../../context/cart";
 import Cart from "../../Cart/Cart";
 
 type RoomsProps = {
@@ -52,9 +51,7 @@ const Rooms = ({ hotelName }: RoomsProps) => {
     getAllRooms();
   }, []);
 
-  //console.log(hotelId);
-  //console.log(filterRooms);
-  //console.log(addToCart);
+ 
   return (
     <article className="available-rooms-con" id="AvailableRooms">
       <Cart></Cart>

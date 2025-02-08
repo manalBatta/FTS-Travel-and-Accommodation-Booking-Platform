@@ -5,10 +5,12 @@ import SearchBar from "./SearchBar/SearchBar";
 import RecentHotels from "./RecentHotels/RecentHotels";
 import TrendingDestinations from "./TrendingDestinations/TrendingDestinations";
 import { motion } from "framer-motion";
+import Cart from "../Cart/Cart";
 
 const HomePage = () => {
   return (
     <div className="home-page">
+      <Cart></Cart>
       <header className="header-container">
         <Navbar
           navItems={[

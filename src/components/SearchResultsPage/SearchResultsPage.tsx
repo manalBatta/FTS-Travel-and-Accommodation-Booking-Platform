@@ -53,18 +53,24 @@ const SearchResultsPage = () => {
   };
 
   const applyFilter = async () => {
-    const response = await searchForAHotel(hotelSearch);
-    const result: string | undefined = await readFromReader(response);
-    if (result) {
-      const hotelsSearchResult = JSON.parse(result);
-      if (hotelSearch.pageNumber === 1) {
-        setHotels(hotelsSearchResult);
-      } else {
-        setHotels((prev) => {
-          return [...prev, ...hotelsSearchResult];
-        });
+    try {
+      const response = await searchForAHotel(hotelSearch);
+      const result: string | undefined = await readFromReader(response);
+      if (result) {
+        const hotelsSearchResult = JSON.parse(result);
+        if (hotelSearch.pageNumber === 1) {
+          setHotels(hotelsSearchResult);
+        } else {
+          setHotels((prev) => {
+            return [...prev, ...hotelsSearchResult];
+          });
+        }
+        setHasMore(hotelsSearchResult.length >= hotelSearch.pageSize);
       }
-      setHasMore(hotelsSearchResult.length >= hotelSearch.pageSize);
+    } catch (error) {
+      setHotels([]);
+
+      console.log("Failed to fetch search result:", error);
     }
   };
 

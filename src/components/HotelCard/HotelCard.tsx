@@ -19,7 +19,7 @@ const HotelCard = memo(({ hotel }: HotelCardProps) => {
       />
       <h3 className="hotel-name">{hotel?.hotelName || hotel.description}</h3>
       <Button>
-        <Link to={`/hotels/${hotel?.hotelId}`}>Book no</Link> <IoHeartOutline />
+        <Link to={`/hotels/${hotel?.hotelId}`}>Book now</Link> 
       </Button>
       <h4 className="hotel-location">
         <IoLocationOutline style={{ fontSize: "1rem" }} />
@@ -45,8 +45,7 @@ const HotelCard = memo(({ hotel }: HotelCardProps) => {
           ))}
       </h5>
       <h6 className="price">
-        {/* To fix error undefined to string when search */}$
-        {hotel?.roomPrice?.toString() || ` ${hotel?.priceUpperBound} -`}
+        {hotel?.roomPrice?.toString() || ` ${hotel?.priceUpperBound} - `}
         {hotel?.priceLowerBound || ""}
         <span className="note">/night</span>
       </h6>

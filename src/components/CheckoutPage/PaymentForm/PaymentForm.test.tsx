@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import PaymentForm from "./PaymentForm";
-import { CartContext } from "../../context/cart";
 import Button from "../../Button/Button";
 import { CartItem } from "../../../Types";
+import { CartContext } from "../../../context/cart";
 
 describe("PaymentForm", () => {
   const mockPay = jest.fn();
@@ -11,7 +11,6 @@ describe("PaymentForm", () => {
   const cartItems: CartItem[] = [];
   const addToCart = jest.fn();
   const removeFromCart = jest.fn();
-
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -25,7 +24,9 @@ describe("PaymentForm", () => {
           addToCart,
           removeFromCart,
           clearCart: mockClearCart,
-        }}>
+          isReserved: jest.fn(),
+        }}
+      >
         <PaymentForm pay={mockPay} />
       </CartContext.Provider>
     );

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
 import "./PaymentForm.css";
-import { CartContext } from "../../context/cart";
 import Button from "../../Button/Button";
 import { PaymentFormProps } from "../../../Types";
+import { CartContext } from "../../../context/cart";
 
 const PaymentForm = ({ pay }: PaymentFormProps) => {
   const [paymentMethod, setPaymentMethod] = useState("Card");

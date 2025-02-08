@@ -1,8 +1,8 @@
-import { getUser } from "../Helpers";
 import * as types from "../Types";
-import { Auth, CitiesRequest, City } from "../Types";
-const baseURL =
-  "https://app-hotel-reservation-webapi-uae-dev-001.azurewebsites.net/api";
+import { CitiesRequest, City } from "../Types";
+const baseURL = "https://hotel.foothilltech.net/api";
+
+
 
 export async function readFromReader(res: Response | undefined | null) {
   const reader = res?.body?.getReader();

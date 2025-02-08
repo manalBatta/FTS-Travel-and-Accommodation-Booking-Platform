@@ -30,7 +30,9 @@ const LoginForm = () => {
             }
             localStorage.setItem("auth", result);
 
-            navigate("/", { replace: true });
+            if (user.username === "admin") {
+              navigate("/adminManagement", { replace: true });
+            } else navigate("/", { replace: true });
           }
         } catch (error) {
           window.alert("Login failed:" + error);

@@ -1,9 +1,9 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
-import { CartContext } from "../context/cart";
 import Cart from "./Cart";
 import { CartItem } from "../../Types";
+import { CartContext } from "../../context/cart";
 
 describe("Cart Component", () => {
   const mockClearCart = jest.fn();
@@ -18,7 +18,9 @@ describe("Cart Component", () => {
           addToCart,
           removeFromCart,
           clearCart: mockClearCart,
-        }}>
+          isReserved: jest.fn(),
+        }}
+      >
         <BrowserRouter>
           <Cart />
         </BrowserRouter>

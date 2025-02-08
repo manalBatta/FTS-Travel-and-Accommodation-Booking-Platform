@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import "./Cart.css";
 import { IoBagCheck } from "react-icons/io5";
-import { CartContext } from "../context/cart";
 import { Link } from "react-router-dom";
+import { CartContext } from "../../context/cart";
 
 const Cart = () => {
   const { cartItems } = useContext(CartContext);

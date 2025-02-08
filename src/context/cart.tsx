@@ -1,6 +1,6 @@
 import { createContext, PropsWithChildren } from "react";
 import { useState, useEffect } from "react";
-import { CartContextValue, CartItem } from "../../Types";
+import { CartContextValue, CartItem } from "../Types";
 
 export const CartContext = createContext<CartContextValue>(null!);
 
@@ -18,6 +18,14 @@ export const CartProvider = (props: PropsWithChildren) => {
     }
   };
 
+  const isReserved = (id: number) => {
+    const isItemInCart = cartItems.find((item) => item.id === id);
+
+    if (isItemInCart) {
+      return true;
+    } else return false;
+  };
+
   const removeFromCart = (id: number) => {
     const isItemInCart = cartItems.find((item) => item.id === id);
 
@@ -29,10 +37,6 @@ export const CartProvider = (props: PropsWithChildren) => {
   const clearCart = () => {
     setCartItems([]);
   };
-
-  // const getCartTotal = () => {
-  //   return cartItems.reduce((total, item) => total + item.price, 0); // calculate the total price of the items in the cart
-  // };
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -52,7 +56,9 @@ export const CartProvider = (props: PropsWithChildren) => {
         addToCart,
         removeFromCart,
         clearCart,
-      }}>
+        isReserved
+      }}
+    >
       {props.children}
     </CartContext.Provider>
   );

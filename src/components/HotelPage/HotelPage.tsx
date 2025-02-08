@@ -17,23 +17,44 @@ const HotelPage = () => {
 
   const getHotelDetails = async () => {
     const hotelId = +location.pathname.slice(8);
+
     const response = await hotel(hotelId);
-    const result = await readFromReader(response);
+
+    if (response.status !== 200) {
+      console.error("Error fetching hotel details:", response);
+      return;
+    }
+
+    console.log("body", response.body);
+
+    const result = await readFromReader(response); //ready to show
+
     //get gallery
     const response2 = await hotelGallery(hotelId);
-    const gallery = await readFromReader(response2);
+
+    if (response2.status !== 200) {
+      if (result)
+        setHotelDetails({
+          ...JSON.parse(result),
+          gallery: [],
+        });
+      console.error("Error fetching hotel gallery:", response2);
+      return;
+    }
+
+    const gallery = await readFromReader(response2); //ready to show
 
     if (result && gallery) {
       try {
+        //parse gallery
         const galleryContent = gallery.trim();
 
         const galleryArray = galleryContent.match(/\[(.*?)\]/);
+
         if (galleryArray && galleryArray[1]) {
           const items = galleryArray[1]
             .split("},")
             .map((item) => JSON.parse(item.endsWith("}") ? item : item + "}"));
-
-          // console.log("Parsed gallery items:", items);
 
           setHotelDetails({
             ...JSON.parse(result),
@@ -41,6 +62,10 @@ const HotelPage = () => {
           });
         } else {
           console.error("Gallery format is invalid:", gallery);
+          setHotelDetails({
+            ...JSON.parse(result),
+            gallery: [],
+          });
         }
       } catch (error) {
         console.error("Error processing gallery or result:", error);
@@ -84,7 +109,17 @@ const HotelPage = () => {
           ))}
       </h2>
 
-      <Gallery gallery={hotelDetails.gallery} columns={3} />
+      {hotelDetails.gallery.length > 0 ? (
+        <Gallery gallery={hotelDetails.gallery} columns={3} />
+      ) : (
+        <img
+          src="/Empty.svg"
+          alt="loading"
+          className="loading"
+          width={500}
+          height={500}
+        />
+      )}
       <MapWithDynamicData
         latitude={hotelDetails.latitude}
         longitude={hotelDetails.longitude}

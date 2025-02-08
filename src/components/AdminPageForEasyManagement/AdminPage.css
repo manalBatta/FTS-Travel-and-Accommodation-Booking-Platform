@@ -91,8 +91,6 @@
 }
 
 .search-bar1 .search-icon {
-  color: white;
-  background-color: var(--Primary);
   padding: 1%;
   border-radius: 8px;
   font-size: 1.2rem;

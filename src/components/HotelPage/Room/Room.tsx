@@ -1,4 +1,4 @@
-import { RoomProps, RoomType } from "../../../Types";
+import { RoomProps } from "../../../Types";
 import Button from "../../Button/Button";
 import "./Room.css";
 import { motion } from "motion/react";
@@ -7,17 +7,32 @@ import { useContext } from "react";
 import { CartContext } from "../../../context/cart";
 
 const Room: React.FC<RoomProps> = ({ room, hotelName, details }: RoomProps) => {
-  const { addToCart, removeFromCart } = useContext(CartContext);
-
+  const { addToCart, removeFromCart, isReserved } = useContext(CartContext);
+  const btnText = details ? (
+    <>
+      <MdOutlineCancel size={20} />
+      cancel
+    </>
+  ) : room.availability ? (
+    isReserved(room.roomId) ? (
+      "Reserved"
+    ) : (
+      "Book now"
+    )
+  ) : (
+    "not avialable"
+  );
   return (
     <motion.div
       className="room"
       initial={{ scale: 0.8 }}
-      animate={{ scale: 1, transition: { duration: 0.5 } }}>
+      animate={{ scale: 1, transition: { duration: 0.5 } }}
+    >
       <section className="section-1">
         <div
           className="room-img"
-          style={{ backgroundImage: `url(${room?.roomPhotoUrl})` }}>
+          style={{ backgroundImage: `url(${room?.roomPhotoUrl})` }}
+        >
           {details && <h1 className="hotel-name">{hotelName}</h1>}
         </div>
       </section>
@@ -48,21 +63,16 @@ const Room: React.FC<RoomProps> = ({ room, hotelName, details }: RoomProps) => {
                 window.location.reload();
               } else
                 try {
-                  if (addToCart && hotelName) addToCart(room.roomId, hotelName);
+                  if (addToCart && hotelName) {
+                    addToCart(room.roomId, hotelName);
+                    window.alert("Room reserved successfully");
+                  }
                 } catch (error) {
                   alert("You reserved room earlier");
                 }
-            }}>
-            {details ? (
-              <>
-                <MdOutlineCancel size={20} />
-                cancel
-              </>
-            ) : room.availability ? (
-              "Book now"
-            ) : (
-              "not avialable"
-            )}
+            }}
+          >
+            {btnText}
           </Button>
         </div>
       </section>

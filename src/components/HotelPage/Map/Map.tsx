@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { motion } from "framer-motion"; // Correcting import for motion
-import { mapArguments } from "../../../Types"; // Assuming mapArguments is defined correctly
+import { motion } from "framer-motion"; 
+import { mapArguments } from "../../../Types";
 import "./Map.css";
 import L from "leaflet";
 
 const MapWithDynamicData = (props: mapArguments) => {
   const [attractions, setAttractions] = useState<any[]>([]);
 
-  // Fetch attractions from OpenStreetMap Overpass API based on latitude and longitude
+  console.log(props);
   useEffect(() => {
     if (props.latitude && props.longitude) {
       const overpassQuery = `
@@ -21,7 +21,6 @@ const MapWithDynamicData = (props: mapArguments) => {
         overpassQuery
       )}`;
 
-      // Fetch attractions when the component mounts or when props change
       fetch(url)
         .then((response) => response.json())
         .then((data) => {

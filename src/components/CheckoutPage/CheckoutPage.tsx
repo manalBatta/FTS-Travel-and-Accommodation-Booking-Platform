@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import "./CheckoutPage.css";
-import { CartContext } from "../context/cart";
 import { BookingDetails, RoomType } from "../../Types";
 import { bookRoom, readFromReader, roomDetails } from "../../services/APIs";
 import { getUser } from "../../Helpers";
 import Room from "../HotelPage/Room/Room";
 import PaymentForm from "./PaymentForm/PaymentForm";
 import { useNavigate } from "react-router-dom";
+import { CartContext } from "../../context/cart";
 
 const CheckoutPage = () => {
   const { cartItems } = useContext(CartContext);
